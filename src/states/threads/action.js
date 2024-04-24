@@ -9,7 +9,22 @@ function asyncReceiveThreads() {
   };
 }
 
+function asyncReceiveThreadDetail(ThreadId) {
+  return async (dispatch) => {
+    const threadDetail = await getThreads(ThreadId);
+    dispatch(receiveThreadDetailActionCreator(threadDetail));
+  };
+}
 
+
+function receiveThreadDetailActionCreator(threadDetail) {
+    return {
+      type: 'RECEIVE_THREAD_DETAIL',
+      payload: {
+        threadDetail
+      }
+    };
+  }
 function receiveThreadsActionCreator(threads) {
     return {
       type: 'RECEIVE_THREADS',
@@ -21,5 +36,6 @@ function receiveThreadsActionCreator(threads) {
 
 export {
   asyncReceiveThreads,
-  receiveThreadsActionCreator
+  receiveThreadsActionCreator,
+  asyncReceiveThreadDetail
 };

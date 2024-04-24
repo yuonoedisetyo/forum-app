@@ -1,9 +1,11 @@
 import React from 'react';
 import { DummyProfil } from '../assets';
 import parse from 'html-react-parser';
+import { Link } from 'react-router-dom';
 
 function ThreadItem({ id, title, body, ownerId }) {
   return (
+    <Link to={`/thread/${id}`}>
     <div style={{ backgroundColor: 'yellow', marginTop: 8, borderRadius: 12, padding: 12 }}>
       <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex'}}>
           <img src={DummyProfil} style={{ height: 32, width: 32,alignSelf:'center',marginRight: 8 }} />
@@ -15,6 +17,7 @@ function ThreadItem({ id, title, body, ownerId }) {
         <p style={{WebkitLineClamp:4,display:'-webkit-box',overflow:'hidden',WebkitBoxOrient:'vertical'}}>{parse(body)}</p>
       </div>
     </div>
+    </Link>
   );
 }
 

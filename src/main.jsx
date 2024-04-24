@@ -11,6 +11,7 @@ import { Provider } from 'react-redux'
 import configureStore from './states/configureStore'
 import ThreadsList from './components/ThreadsList.jsx';
 import Threads from './pages/Threads.jsx';
+import ThreadDetail from './pages/ThreadDetail.jsx';
 
 const store = configureStore()
 
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
     // ],
   },
   {
-    path: "contacts/:contactId",
-    element: <App />,
+    path: "thread/:ThreadId",
+    element: <ThreadDetail />,
   },
 ]);
 

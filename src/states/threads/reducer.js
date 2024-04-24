@@ -20,6 +20,9 @@ function threadsReducer(threads = [], action = {}) {
     if (action.type === 'RECEIVE_THREADS') {
       return action.payload.threads;
     }
+    if (action.type === 'RECEIVE_THREAD_DETAIL') {
+      return action.payload.threadDetail;
+    }
   
     return threads;
   }
