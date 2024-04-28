@@ -14,6 +14,7 @@ import Threads from './pages/Threads.jsx';
 import ThreadDetail from './pages/ThreadDetail.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
+import Users from './pages/Users.jsx';
 
 const store = configureStore()
 
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
   {
     path: "login",
     element: <LoginPage />,
+  },
+  {
+    path: "users",
+    element: <Users />,
   },
 ]);
 

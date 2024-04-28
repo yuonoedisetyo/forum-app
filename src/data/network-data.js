@@ -62,8 +62,23 @@ async function getThreads(ThreadId) {
     return { error: false,token:responseJson?.data?.token };
   }
 
+  async function getUsers(UserId) {
+    const response = await fetch(`${BASE_URL}/users${UserId?"/"+UserId:""}`);
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      return  null;
+    }
+    // if(UserId){
+    //   return responseJson?.data?.detailThread
+    // }
+    console.log("responseJson?.data ",responseJson?.data)
+    return responseJson?.data?.users;
+  }
+
   export {
       getThreads,
       register,
-      login
+      login,
+      getUsers
   }

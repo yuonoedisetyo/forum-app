@@ -7,6 +7,7 @@ function rootReducer(state = {}, action = {}) {
     threadDetail: threadsReducer(state.threadDetail, action),
     account: accountReducer(state.account, action),
     token: accountReducer(state.token, action),
+    users: accountReducer(state.users, action),
   };
 }
 
