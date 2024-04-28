@@ -13,6 +13,32 @@ async function getThreads(ThreadId) {
     return responseJson?.data?.threads;
   }
 
+  async function register({name,email,password}) {
+
+    const requestBody= JSON.stringify({
+      name,
+      email,
+      password
+    })
+
+    const response = await fetch(`${BASE_URL}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,account:responseJson?.data?.user };
+  }
+
   export {
-      getThreads
+      getThreads,
+      register
   }
