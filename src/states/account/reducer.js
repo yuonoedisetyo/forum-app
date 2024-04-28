@@ -1,5 +1,8 @@
-function accountReducer(account = [], action = {}) {
+function accountReducer(account = null, action = {}) {
     if (action.type === 'ADD_ACCOUNT') {
+      return action.payload;
+    }
+    if (action.type === 'LOGIN') {
       return action.payload;
     }
   

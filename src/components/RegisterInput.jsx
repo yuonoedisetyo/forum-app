@@ -1,28 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import useInput from '../hooks/useInput';
 
 function RegisterInput({register}) {
 
+    const [name, onNameChange] = useInput('');
+    const [email, onEmailChange] = useInput('');
+    const [password, onPasswordChange] = useInput('');
 
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-   const handleChangeEmail =({text})=>{
-     setEmail(text)
-   }
-   const handleChangeName =({text})=>{
-     setName(text)
-   }
-   const handleChangePassword =({text})=>{
-     setPassword(text)
-   }
-
-   const handleSubmit=(e)=> {
+   const handleSubmit=(event)=> {
     // Cegah peramban memuat ulang halaman
-    e.preventDefault();
+    event.preventDefault();
 
     // Membaca data form
-    const form = e.target;
+    const form = event.target;
     console.log("form ",form)
     const formData = new FormData(form);
     console.log("formData ",formData)
@@ -41,9 +31,9 @@ function RegisterInput({register}) {
     <div style={{}}>
       <h3>Register</h3>
       <form method="post" onSubmit={handleSubmit}>
-      <input type="text" name="email" value={email} onChange={handleChangeEmail} />
-      <input type="text" name="name" value={name} onChange={handleChangeName} />
-      <input type="text" name="password" value={password} onChange={handleChangePassword} />
+      <input type="text" name="email" value={email} onChange={onEmailChange} />
+      <input type="text" name="name" value={name} onChange={onNameChange} />
+      <input type="text" name="password" value={password} onChange={onPasswordChange} />
       <button type='submit' 
       // onClick={()=>register({name,email,password})}
       >Simpan</button>

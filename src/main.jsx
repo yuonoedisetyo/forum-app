@@ -13,6 +13,7 @@ import ThreadsList from './components/ThreadsList.jsx';
 import Threads from './pages/Threads.jsx';
 import ThreadDetail from './pages/ThreadDetail.jsx';
 import RegisterPage from './pages/RegisterPage.jsx';
+import LoginPage from './pages/LoginPage.jsx';
 
 const store = configureStore()
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
   {
     path: "register",
     element: <RegisterPage />,
+  },
+  {
+    path: "login",
+    element: <LoginPage />,
   },
 ]);
 
