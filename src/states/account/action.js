@@ -1,4 +1,4 @@
-import { getUsers, login, register } from "../../data/network-data";
+import { getUsers, login, myAccount, register } from "../../data/network-data";
 
 function asyncRegister(formData) {
     console.log("formData ",formData)
@@ -34,6 +34,17 @@ function asyncReceiveUsers(UserId) {
       }
     };
   }
+function asyncReceiveMyAccount() {
+    console.log("asyncReceiveMyAccount")
+    return async (dispatch) => {
+      const result = await myAccount();
+      console.log("result ",result)
+      if(!result?.error){
+          console.log("account asyncReceiveMyAccount ",result?.myAccount)
+          dispatch(myAccountActionCreator(result?.myAccount));
+      }
+    };
+  }
 
   function addAccountActionCreator({name,id,email,avatar}) {
     return {
@@ -63,10 +74,24 @@ function asyncReceiveUsers(UserId) {
     };
   }
 
+  function myAccountActionCreator({name,email,avatar,id}) {
+    return {
+      type: 'RECEIVE_MY_ACCOUNT',
+      payload: {
+        name,
+        id,
+        avatar,
+        email
+      }
+    };
+  }
+
   export {
     asyncRegister,
     addAccountActionCreator,
     asyncLogin,
     userActionCreator,
-    asyncReceiveUsers
+    asyncReceiveUsers,
+    asyncReceiveMyAccount,
+    myAccountActionCreator
   }

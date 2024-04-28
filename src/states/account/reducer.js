@@ -8,6 +8,9 @@ function accountReducer(account = null, action = {}) {
     if (action.type === 'RECEIVE_USERS') {
       return action.payload.users;
     }
+    if (action.type === 'RECEIVE_MY_ACCOUNT') {
+      return action.payload.myAccount;
+    }
   
     // if (action.type === 'DELETE_TODO') {
     //   return account.filter((todo) => todo.id !== action.payload.id);

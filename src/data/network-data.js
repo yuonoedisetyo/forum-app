@@ -1,5 +1,23 @@
 const BASE_URL = 'https://forum-api.dicoding.dev/v1';
 
+function getAccessToken() {
+  return localStorage.getItem('accessToken');
+}
+
+function putAccessToken(accessToken) {
+  return localStorage.setItem('accessToken', accessToken);
+}
+
+async function fetchWithToken(url, options = {}) {
+  return fetch(url, {
+    ...options,
+    headers: {
+      ...options.headers,
+      Authorization: `Bearer ${getAccessToken()}`,
+    },
+  });
+}
+
 async function getThreads(ThreadId) {
     const response = await fetch(`${BASE_URL}/threads${ThreadId?"/"+ThreadId:""}`);
     const responseJson = await response.json();
@@ -58,8 +76,26 @@ async function getThreads(ThreadId) {
       alert(responseJson.message);
       return { error: true};
     }
+
+    putAccessToken(responseJson?.data?.token)
     
     return { error: false,token:responseJson?.data?.token };
+  }
+
+  async function myAccount() {
+
+    console.log("fetch")
+
+    const response = await fetchWithToken(`${BASE_URL}/users/me`);
+    const responseJson = await response.json();
+    console.log("response ",response)
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,myAccount:responseJson?.data?.user };
   }
 
   async function getUsers(UserId) {
@@ -80,5 +116,6 @@ async function getThreads(ThreadId) {
       getThreads,
       register,
       login,
-      getUsers
+      getUsers,
+      myAccount
   }

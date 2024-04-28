@@ -8,6 +8,7 @@ function rootReducer(state = {}, action = {}) {
     account: accountReducer(state.account, action),
     token: accountReducer(state.token, action),
     users: accountReducer(state.users, action),
+    myAccount: accountReducer(state.myAccount, action),
   };
 }
 
