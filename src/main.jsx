@@ -16,6 +16,7 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import Users from './pages/Users.jsx';
 import MyAccount from './pages/MyAccount.jsx';
+import Leaderboards from './pages/Leaderboards.jsx';
 
 const store = configureStore()
 
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: "myaccount",
     element: <MyAccount />,
+  },
+  {
+    path: "leaderboards",
+    element: <Leaderboards />,
   },
 ]);
 

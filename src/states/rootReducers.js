@@ -1,4 +1,5 @@
 import { accountReducer } from './account/reducer';
+import { leaderBoardsReducer } from './leaderboards/reducers';
 import { commentsReducer, threadsReducer } from './threads/reducer';
 
 function rootReducer(state = {}, action = {}) {
@@ -10,6 +11,7 @@ function rootReducer(state = {}, action = {}) {
     users: accountReducer(state.users, action),
     myAccount: accountReducer(state.myAccount, action),
     comments: commentsReducer(state.comments, action),
+    leaderboards: leaderBoardsReducer(state.leaderboards, action),
   };
 }
 

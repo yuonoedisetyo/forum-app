@@ -101,8 +101,74 @@ async function getThreads(ThreadId) {
     
     return { error: false,upVotes:responseJson?.data?.upVotesBy };
   }
+  const commentVoteUp=async({ThreadId,CommentId})=> {
+    // const requestBody= JSON.stringify({
+    //   content
+    // })
+    const token =  getAccessToken()
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/up-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token,
+      },
+      // body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,upVotes:responseJson?.data?.vote };
+  }
+  const commentDownVote=async({ThreadId,CommentId})=> {
+    // const requestBody= JSON.stringify({
+    //   content
+    // })
+    const token =  getAccessToken()
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/down-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token,
+      },
+      // body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,downVotes:responseJson?.data?.vote };
+  }
+  const commentNeutralVote=async({ThreadId,CommentId})=> {
+    // const requestBody= JSON.stringify({
+    //   content
+    // })
+    const token =  getAccessToken()
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/neutral-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token,
+      },
+      // body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,neutralVotes:responseJson?.data?.vote };
+  }
 
-  const threadDownUp=async(ThreadId)=> {
+  const threadDownVote=async(ThreadId)=> {
     // const requestBody= JSON.stringify({
     //   content
     // })
@@ -123,6 +189,28 @@ async function getThreads(ThreadId) {
     }
     
     return { error: false,downVotes:responseJson?.data?.downVotesBy };
+  }
+  const threadNeutralVote=async(ThreadId)=> {
+    // const requestBody= JSON.stringify({
+    //   content
+    // })
+    const token =  getAccessToken()
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/neutral-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token,
+      },
+      // body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,neutralVotes:responseJson?.data?.neutralVotesBy };
   }
 
   async function register({name,email,password}) {
@@ -192,6 +280,19 @@ async function getThreads(ThreadId) {
     return { error: false,myAccount:responseJson?.data?.user };
   }
 
+  async function getLeaderBoards() {
+    const response = await fetch(`${BASE_URL}/leaderboards`);
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      return  null;
+    }
+    // if(UserId){
+    //   return responseJson?.data?.detailThread
+    // }
+    console.log("responseJson?.data ",responseJson?.data)
+    return responseJson?.data?.leaderboards;
+  }
   async function getUsers(UserId) {
     const response = await fetch(`${BASE_URL}/users${UserId?"/"+UserId:""}`);
     const responseJson = await response.json();
@@ -215,5 +316,10 @@ async function getThreads(ThreadId) {
       addThread,
       addComment,
       threadVoteUp,
-      threadDownUp
+      threadDownVote,
+      threadNeutralVote,
+      commentVoteUp,
+      commentDownVote,
+      commentNeutralVote,
+      getLeaderBoards
   }

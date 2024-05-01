@@ -1,7 +1,7 @@
 import React from 'react';
 import CommentItem from './CommentItem';
 
-function CommentsList({comments}) {
+function CommentsList({comments,commentUpVote, commentDownVote}) {
 
   return (
     <div style={{}}>
@@ -12,6 +12,9 @@ function CommentsList({comments}) {
             <CommentItem {...comment} 
             // toggleThread={onToggleThread} 
             // deleteThread={onDeleteThread}
+            commentUpVote={commentUpVote}
+            commentDownVote={commentDownVote}
+            commentNeutralVote={commentNeutralVote}
              />
         ))}
     </div>

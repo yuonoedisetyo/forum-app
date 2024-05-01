@@ -8,9 +8,13 @@ import ThreadDetail from '../components/ThreadDetail';
 import UpVoteList from '../components/UpVoteList';
 import {
     asyncAddComment,
+    asyncCommentDownVote,
+    asyncCommentNeutralVote,
+    asyncCommentUpVote,
     asyncReceiveThreadDetail,
   asyncReceiveThreads,
   asyncThreadDownVote,
+  asyncThreadNeutralVote,
   asyncThreadUpVote,
 } from '../states/threads/action';
 
@@ -39,17 +43,35 @@ function ThreadDetailPage() {
     dispatch(asyncThreadDownVote(ThreadId));
     dispatch(asyncReceiveThreadDetail(ThreadId));
     }
+  const onNeutralVote = async()=>{
+    dispatch(asyncThreadNeutralVote(ThreadId));
+    dispatch(asyncReceiveThreadDetail(ThreadId));
+    }
+  const onCommentUpVote = async(CommentId)=>{
+    dispatch(asyncCommentUpVote({ThreadId,CommentId}));
+    // dispatch(asyncReceiveThreadDetail(ThreadId));
+    }
+  const onCommentDownVote = async(CommentId)=>{
+    dispatch(asyncCommentDownVote({ThreadId,CommentId}));
+    dispatch(asyncReceiveThreadDetail(ThreadId));
+    }
+  const onCommentNeutralVote = async(CommentId)=>{
+    dispatch(asyncCommentNeutralVote({ThreadId,CommentId}));
+    dispatch(asyncReceiveThreadDetail(ThreadId));
+    }
 
   return (
       <>
     <ThreadDetail title={threadDetail?.title} body={threadDetail?.body} />
-    <CommentsList comments={threadDetail?.comments}/>
+    <CommentsList comments={threadDetail?.comments} commentUpVote={onCommentUpVote} commentDownVote={onCommentDownVote}
+    commentNeutralVote={onCommentNeutralVote}/>
     <CommentInput addComment={onAddComment}/>
 
     <button onClick={onUpVote}>Up Vote</button>
     <UpVoteList upvotes={threadDetail?.upVotesBy}/>
     <button onClick={onDownVote}>Down Vote</button>
     <DownVoteList downVotes={threadDetail?.downVotesBy}/>
+    <button onClick={onNeutralVote}>Neutral Vote</button>
       </>
   );
 }

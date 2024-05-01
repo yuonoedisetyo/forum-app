@@ -1,5 +1,5 @@
 import mockAPI from '../../data/mockAPI';
-import { addComment, addThread, getThreads, threadDownUp, threadVoteUp } from '../../data/network-data';
+import { addComment, addThread, commentDownVote, commentNeutralVote, commentVoteUp, getThreads, threadDownVote, threadNeutralVote, threadVoteUp } from '../../data/network-data';
 
 function asyncReceiveThreads() {
   return async (dispatch) => {
@@ -37,10 +37,34 @@ function asyncThreadUpVote(ThreadId){
     dispatch(receiveThreadUpVoteActionCreator(vote));
   };
 }
+function asyncCommentUpVote({ThreadId,CommentId}){
+  return async (dispatch) => {
+    const {vote} = await commentVoteUp({ThreadId,CommentId});
+    dispatch(receiveCommentUpVoteActionCreator(vote));
+  };
+}
+function asyncCommentDownVote({ThreadId,CommentId}){
+  return async (dispatch) => {
+    const {vote} = await commentDownVote({ThreadId,CommentId});
+    dispatch(receiveCommentDownVoteActionCreator(vote));
+  };
+}
+function asyncCommentNeutralVote({ThreadId,CommentId}){
+  return async (dispatch) => {
+    const {vote} = await commentNeutralVote({ThreadId,CommentId});
+    dispatch(receiveCommentNeutralVoteActionCreator(vote));
+  };
+}
 function asyncThreadDownVote(ThreadId){
   return async (dispatch) => {
-    const {vote} = await threadDownUp(ThreadId);
+    const {vote} = await threadDownVote(ThreadId);
     dispatch(receiveThreadDownVoteActionCreator(vote));
+  };
+}
+function asyncThreadNeutralVote(ThreadId){
+  return async (dispatch) => {
+    const {vote} = await threadNeutralVote(ThreadId);
+    dispatch(receiveThreadNeutralVoteActionCreator(vote));
   };
 }
 
@@ -117,6 +141,50 @@ function receiveThreadDownVoteActionCreator({id,userId,threadId,voteType}) {
       }
     };
   }
+function receiveThreadNeutralVoteActionCreator({id,userId,threadId,voteType}) {
+    return {
+      type: 'THREAD_NEUTRALVOTE',
+      payload: {
+        id,
+        userId,
+        threadId,
+        voteType
+      }
+    };
+  }
+function receiveCommentUpVoteActionCreator({id,userId,threadId,voteType}) {
+    return {
+      type: 'COMMENT_UPVOTE',
+      payload: {
+        id,
+        userId,
+        threadId,
+        voteType
+      }
+    };
+  }
+function receiveCommentDownVoteActionCreator({id,userId,threadId,voteType}) {
+    return {
+      type: 'COMMENT_DOWNVOTE',
+      payload: {
+        id,
+        userId,
+        threadId,
+        voteType
+      }
+    };
+  }
+function receiveCommentNeutralVoteActionCreator({id,userId,threadId,voteType}) {
+    return {
+      type: 'COMMENT_NEUTRALVOTE',
+      payload: {
+        id,
+        userId,
+        threadId,
+        voteType
+      }
+    };
+  }
 
 export {
   asyncReceiveThreads,
@@ -127,5 +195,9 @@ export {
   asyncAddComment,
   receiveAddCommentActionCreator,
   asyncThreadUpVote,
-  asyncThreadDownVote
+  asyncThreadDownVote,
+  asyncThreadNeutralVote,
+  asyncCommentUpVote,
+  asyncCommentDownVote,
+  asyncCommentNeutralVote
 };
