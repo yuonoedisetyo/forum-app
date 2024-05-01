@@ -1,5 +1,5 @@
 import mockAPI from '../../data/mockAPI';
-import { getThreads } from '../../data/network-data';
+import { addThread, getThreads } from '../../data/network-data';
 
 function asyncReceiveThreads() {
   return async (dispatch) => {
@@ -14,6 +14,14 @@ function asyncReceiveThreadDetail(ThreadId) {
     const threadDetail = await getThreads(ThreadId);
     dispatch(receiveThreadDetailActionCreator(threadDetail));
   };
+}
+
+function asyncAddThread(formData) {
+  return async (dispatch) => {
+    const {thread} = await addThread(formData);
+    dispatch(receiveAddThreadActionCreator(thread));
+  };
+    
 }
 
 
@@ -33,9 +41,28 @@ function receiveThreadsActionCreator(threads) {
       }
     };
   }
+function receiveAddThreadActionCreator({id,title,body,category,createdAt,ownerId,upVotesBy,downVotesBy,totalComments}) {
+    return {
+      type: 'ADD_THREAD',
+      payload: {
+        id,
+        title,
+        body,
+        category,
+        createdAt,
+        ownerId,
+        upVotesBy,
+        downVotesBy,
+        totalComments
+      }
+    };
+  }
+
 
 export {
   asyncReceiveThreads,
   receiveThreadsActionCreator,
-  asyncReceiveThreadDetail
+  asyncReceiveThreadDetail,
+  receiveAddThreadActionCreator,
+  asyncAddThread
 };

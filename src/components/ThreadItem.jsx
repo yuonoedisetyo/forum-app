@@ -14,7 +14,7 @@ function ThreadItem({ id, title, body, ownerId }) {
       <div style={{ height: 8 }}></div>
       <div style={{ textAlign: 'left' }}>
         <label style={{ fontWeight: 'bold' }}>{title}</label>
-        <p style={{WebkitLineClamp:4,display:'-webkit-box',overflow:'hidden',WebkitBoxOrient:'vertical'}}>{parse(body)}</p>
+        <p style={{WebkitLineClamp:4,display:'-webkit-box',overflow:'hidden',WebkitBoxOrient:'vertical'}}>{(body)}</p>
       </div>
     </div>
     </Link>

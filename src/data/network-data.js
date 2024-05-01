@@ -31,6 +31,31 @@ async function getThreads(ThreadId) {
     return responseJson?.data?.threads;
   }
 
+  const addThread=async({title,body,category})=> {
+    const requestBody= JSON.stringify({
+      title,
+      body,
+      category
+    })
+    const token =  getAccessToken()
+    const response = await fetch(`${BASE_URL}/threads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token,
+      },
+      body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,thread:responseJson?.data?.thread };
+  }
+
   async function register({name,email,password}) {
 
     const requestBody= JSON.stringify({
@@ -117,5 +142,6 @@ async function getThreads(ThreadId) {
       register,
       login,
       getUsers,
-      myAccount
+      myAccount,
+      addThread
   }

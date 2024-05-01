@@ -9,7 +9,9 @@ function accountReducer(account = null, action = {}) {
       return action.payload.users;
     }
     if (action.type === 'RECEIVE_MY_ACCOUNT') {
-      return action.payload.myAccount;
+        // console.log("action.type ",action.type)
+        // console.log("action.payload ",action.payload)
+      return action.payload;
     }
   
     // if (action.type === 'DELETE_TODO') {

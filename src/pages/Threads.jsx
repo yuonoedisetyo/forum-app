@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import ThreadInput from '../components/ThreadInput';
 import ThreadsList from '../components/ThreadsList';
 import {
+  asyncAddThread,
   asyncReceiveThreads,
 } from '../states/threads/action';
 
@@ -14,16 +16,9 @@ function Threads() {
   }, [dispatch]);
 
   
-
-  // function onAddThread(text) {
-  //   const id = `todo-${+new Date()}`; // generate id using timestamp
-  //   dispatch(
-  //     addThreadActionCreator({
-  //       id,
-  //       text
-  //     })
-  //   );
-  // }
+  const onAddThread = async(formdata)=>{
+    dispatch(asyncAddThread(formdata));
+}
 
   // function onToggleThread(id) {
   //   dispatch(toggleThreadActionCreator(id));
@@ -36,7 +31,10 @@ function Threads() {
   console.log("threads1 ",threads)
 
   return (
+    <>
+    <ThreadInput addThread={onAddThread} />
     <ThreadsList threads={threads} />
+    </>
   );
 }
 

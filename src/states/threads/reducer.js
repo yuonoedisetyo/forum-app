@@ -1,7 +1,8 @@
 function threadsReducer(threads = [], action = {}) {
-    // if (action.type === 'ADD_TODO') {
-    //   return [...threads, action.payload];
-    // }
+    if (action.type === 'ADD_THREAD') {
+      console.log("ADD_THREAD threads ",threads)
+      return [action.payload,...threads];
+    }
   
     // if (action.type === 'DELETE_TODO') {
     //   return threads.filter((todo) => todo.id !== action.payload.id);
