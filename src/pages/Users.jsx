@@ -5,39 +5,39 @@ import { asyncReceiveUsers } from '../states/account/action';
 
 
 function Users() {
-  const users = useSelector((states) => states.users);
-  console.log("users ",JSON.stringify(users))
-  const dispatch = useDispatch();
+    const users = useSelector((states) => states.users);
+    console.log("users ", JSON.stringify(users))
+    const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(asyncReceiveUsers());
-  }, [dispatch]);
+    useEffect(() => {
+        dispatch(asyncReceiveUsers());
+    }, [dispatch]);
 
-  
 
-  // function onAddThread(text) {
-  //   const id = `todo-${+new Date()}`; // generate id using timestamp
-  //   dispatch(
-  //     addThreadActionCreator({
-  //       id,
-  //       text
-  //     })
-  //   );
-  // }
 
-  // function onToggleThread(id) {
-  //   dispatch(toggleThreadActionCreator(id));
-  // }
+    // function onAddThread(text) {
+    //   const id = `todo-${+new Date()}`; // generate id using timestamp
+    //   dispatch(
+    //     addThreadActionCreator({
+    //       id,
+    //       text
+    //     })
+    //   );
+    // }
 
-  // function onDeleteThread(id) {
-  //   dispatch(deleteThreadActionCreator(id));
-  // }
+    // function onToggleThread(id) {
+    //   dispatch(toggleThreadActionCreator(id));
+    // }
 
-  console.log("users ",users)
+    // function onDeleteThread(id) {
+    //   dispatch(deleteThreadActionCreator(id));
+    // }
 
-  return (
-    <UsersList users={users} />
-  );
+    console.log("users ", users)
+
+    return (
+        <UsersList users={users} />
+    );
 }
 
 export default Users;

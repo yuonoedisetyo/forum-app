@@ -18,25 +18,25 @@ import UpVoteList from './UpVoteList';
 //     "downVotesBy": []
 // }
 
-function CommentItem({ id,content,createdAt,upVotesBy,downVotesBy,commentUpVote,commentDownVote,commentNeutralVote }) {
-  return (
-    <div style={{ backgroundColor: 'yellow', marginTop: 8, borderRadius: 12, padding: 12 }}>
-      <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex'}}>
-          <img src={DummyProfil} style={{ height: 32, width: 32,alignSelf:'center',marginRight: 8 }} />
-        {/* <label>{content}</label> */}
-      </div>
-      <div style={{ height: 8 }}></div>
-      <div style={{ textAlign: 'left' }}>
-        {/* <label style={{ fontWeight: 'bold' }}>{title}</label> */}
-        <p style={{WebkitLineClamp:4,display:'-webkit-box',overflow:'hidden',WebkitBoxOrient:'vertical'}}>{(content)}</p>
-        <button onClick={()=>commentUpVote(id)}>Comment Up Vote</button>
-        <button onClick={()=>commentDownVote(id)}>Comment Down Vote</button>
-        <button onClick={()=>commentNeutralVote(id)}>Comment Neutral Vote</button>
-        <UpVoteList upVotes={upVotesBy}/>
-        <DownVoteList downVotes={downVotesBy}/>
-      </div>
-    </div>
-  );
+function CommentItem({ id, content, createdAt, upVotesBy, downVotesBy, commentUpVote, commentDownVote, commentNeutralVote }) {
+    return (
+        <div style={{ backgroundColor: 'yellow', marginTop: 8, borderRadius: 12, padding: 12 }}>
+            <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex' }}>
+                <img src={DummyProfil} style={{ height: 32, width: 32, alignSelf: 'center', marginRight: 8 }} />
+                {/* <label>{content}</label> */}
+            </div>
+            <div style={{ height: 8 }}></div>
+            <div style={{ textAlign: 'left' }}>
+                {/* <label style={{ fontWeight: 'bold' }}>{title}</label> */}
+                <p style={{ WebkitLineClamp: 4, display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical' }}>{parse(content)}</p>
+                <button onClick={() => commentUpVote(id)}>Comment Up Vote</button>
+                <button onClick={() => commentDownVote(id)}>Comment Down Vote</button>
+                <button onClick={() => commentNeutralVote(id)}>Comment Neutral Vote</button>
+                <UpVoteList upVotes={upVotesBy} />
+                <DownVoteList downVotes={downVotesBy} />
+            </div>
+        </div>
+    );
 }
 
 export default CommentItem;

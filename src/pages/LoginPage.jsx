@@ -28,30 +28,30 @@ function LoginPage({ loginSuccess }) {
   //   }
   // }
 
-  const onLogin = async(formdata)=>{
+  const onLogin = async (formdata) => {
     dispatch(asyncLogin(formdata));
-}
+  }
 
-useEffect(()=>{
-  console.log("token ",token)
- if(token){
-   navigate("/")
- }
-},[token])
+  useEffect(() => {
+    console.log("token ", token)
+    if (token) {
+      navigate("/")
+    }
+  }, [token])
 
   return (
     // <>
     //   {!loadingUser &&
-        <section >
-          <h2>{"Silakan masuk untuk melanjutkan ..."}</h2>
-          <LoginInput login={onLogin} loading={loading}/>
-          {loading?
-            <h1>Sedang memuat data ...</h1>
-            :
-            errorMessage && <p>{errorMessage}</p>
-          }
-          <p>{"Belum punya akun?"} <Link to="/register">{ "Daftar di sini."}</Link></p>
-        </section>
+    <section >
+      <h2>{"Silakan masuk untuk melanjutkan ..."}</h2>
+      <LoginInput login={onLogin} loading={loading} />
+      {loading ?
+        <h1>Sedang memuat data ...</h1>
+        :
+        errorMessage && <p>{errorMessage}</p>
+      }
+      <p>{"Belum punya akun?"} <Link to="/register">{"Daftar di sini."}</Link></p>
+    </section>
     //   }
     // </>
   );

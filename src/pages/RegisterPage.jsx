@@ -6,28 +6,28 @@ import { asyncRegister } from '../states/account/action';
 
 function RegisterPage() {
   const account = useSelector((states) => states.account);
-  console.log("account - ",JSON.stringify(account))
+  console.log("account - ", JSON.stringify(account))
 
-    const dispatch = useDispatch()
-    const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
-   const onRegister = async(formdata)=>{
-        dispatch(asyncRegister(formdata));
-   }
+  const onRegister = async (formdata) => {
+    dispatch(asyncRegister(formdata));
+  }
 
-   useEffect(()=>{
-     console.log("account?.id ",account?.id)
-    if(account?.id){
+  useEffect(() => {
+    console.log("account?.id ", account?.id)
+    if (account?.id) {
       navigate("/")
     }
-   },[account])
+  }, [account])
 
   return (
     <div style={{}}>
       <h3>Register</h3>
       <RegisterInput register={onRegister} />
 
-       
+
     </div>
   );
 }

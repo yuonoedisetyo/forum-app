@@ -15,10 +15,10 @@ function Threads() {
     dispatch(asyncReceiveThreads());
   }, [dispatch]);
 
-  
-  const onAddThread = async(formdata)=>{
+
+  const onAddThread = async (formdata) => {
     dispatch(asyncAddThread(formdata));
-}
+  }
 
   // function onToggleThread(id) {
   //   dispatch(toggleThreadActionCreator(id));
@@ -28,12 +28,12 @@ function Threads() {
   //   dispatch(deleteThreadActionCreator(id));
   // }
 
-  console.log("threads1 ",threads)
+  console.log("threads1 ", threads)
 
   return (
     <>
-    <ThreadInput addThread={onAddThread} />
-    <ThreadsList threads={threads} />
+      <ThreadInput addThread={onAddThread} />
+      <ThreadsList threads={threads} />
     </>
   );
 }

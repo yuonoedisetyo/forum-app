@@ -10,7 +10,7 @@ import rootReducer from './rootReducers'
 export default function configureStore(preloadedState) {
   const middlewares = [loggerMiddleware, thunk]
   const middlewareEnhancer = applyMiddleware(...middlewares)
-  
+
 
   const enhancers = [middlewareEnhancer, monitorReducersEnhancer]
   const composedEnhancers = compose(...enhancers)
