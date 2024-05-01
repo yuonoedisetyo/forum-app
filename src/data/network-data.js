@@ -79,6 +79,29 @@ async function getThreads(ThreadId) {
     return { error: false,comment:responseJson?.data?.comment };
   }
 
+  const threadVoteUp=async(ThreadId)=> {
+    // const requestBody= JSON.stringify({
+    //   content
+    // })
+    const token =  getAccessToken()
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/up-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token,
+      },
+      // body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,upVote:responseJson?.data?.upVotesBy };
+  }
+
   async function register({name,email,password}) {
 
     const requestBody= JSON.stringify({
@@ -167,5 +190,6 @@ async function getThreads(ThreadId) {
       getUsers,
       myAccount,
       addThread,
-      addComment
+      addComment,
+      threadVoteUp
   }

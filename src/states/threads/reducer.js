@@ -24,6 +24,9 @@ function threadsReducer(threads = [], action = {}) {
     if (action.type === 'RECEIVE_THREAD_DETAIL') {
       return action.payload.threadDetail;
     }
+    if (action.type === 'THREAD_UPVOTE') {
+      return action.payload.upVote;
+    }
   
     return threads;
   }

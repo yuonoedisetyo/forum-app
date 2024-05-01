@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom';
 import CommentInput from '../components/CommentInput';
 import CommentsList from '../components/CommentList';
 import ThreadDetail from '../components/ThreadDetail';
+import UpVoteList from '../components/UpVoteList';
 import {
     asyncAddComment,
     asyncReceiveThreadDetail,
   asyncReceiveThreads,
+  asyncThreadUpVote,
 } from '../states/threads/action';
 
 function ThreadDetailPage() {
@@ -27,12 +29,19 @@ function ThreadDetailPage() {
     dispatch(asyncAddComment({content,ThreadId}));
     dispatch(asyncReceiveThreadDetail(ThreadId));
     }
+  const onUpVote = async()=>{
+    dispatch(asyncThreadUpVote(ThreadId));
+    dispatch(asyncReceiveThreadDetail(ThreadId));
+    }
 
   return (
       <>
     <ThreadDetail title={threadDetail?.title} body={threadDetail?.body} />
     <CommentsList comments={threadDetail?.comments}/>
     <CommentInput addComment={onAddComment}/>
+
+    <button onClick={onUpVote}>Up Vote</button>
+    <UpVoteList upvotes={threadDetail?.upVotesBy}/>
       </>
   );
 }
