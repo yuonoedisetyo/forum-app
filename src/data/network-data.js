@@ -56,6 +56,29 @@ async function getThreads(ThreadId) {
     return { error: false,thread:responseJson?.data?.thread };
   }
 
+  const addComment=async({content,ThreadId})=> {
+    const requestBody= JSON.stringify({
+      content
+    })
+    const token =  getAccessToken()
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token,
+      },
+      body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,comment:responseJson?.data?.comment };
+  }
+
   async function register({name,email,password}) {
 
     const requestBody= JSON.stringify({
@@ -143,5 +166,6 @@ async function getThreads(ThreadId) {
       login,
       getUsers,
       myAccount,
-      addThread
+      addThread,
+      addComment
   }

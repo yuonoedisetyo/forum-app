@@ -27,6 +27,13 @@ function threadsReducer(threads = [], action = {}) {
   
     return threads;
   }
+
+  const commentsReducer =(comments =[],action = {})=>{
+    if (action.type === 'ADD_COMMENT') {
+      return [action.payload,...comments];
+    }
+    return comments;
+  }
   
-  export { threadsReducer };
+  export { threadsReducer,commentsReducer };
   

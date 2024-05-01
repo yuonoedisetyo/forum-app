@@ -1,5 +1,5 @@
 import { accountReducer } from './account/reducer';
-import { threadsReducer } from './threads/reducer';
+import { commentsReducer, threadsReducer } from './threads/reducer';
 
 function rootReducer(state = {}, action = {}) {
   return {
@@ -9,6 +9,7 @@ function rootReducer(state = {}, action = {}) {
     token: accountReducer(state.token, action),
     users: accountReducer(state.users, action),
     myAccount: accountReducer(state.myAccount, action),
+    comments: commentsReducer(state.comments, action),
   };
 }
 

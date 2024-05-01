@@ -9,7 +9,7 @@ function ThreadDetail({title,body}) {
     <div style={{}}>
       <h3>My Thread Detail</h3>
      <p>{title}</p>
-     <p>{parse(body)}</p>
+     <p>{(body)}</p>
     </div>
   );
 }
