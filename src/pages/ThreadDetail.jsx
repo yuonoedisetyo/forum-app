@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import CommentInput from '../components/CommentInput';
 import CommentsList from '../components/CommentList';
+import DownVoteList from '../components/DownVoteList';
 import ThreadDetail from '../components/ThreadDetail';
 import UpVoteList from '../components/UpVoteList';
 import {
     asyncAddComment,
     asyncReceiveThreadDetail,
   asyncReceiveThreads,
+  asyncThreadDownVote,
   asyncThreadUpVote,
 } from '../states/threads/action';
 
@@ -33,6 +35,10 @@ function ThreadDetailPage() {
     dispatch(asyncThreadUpVote(ThreadId));
     dispatch(asyncReceiveThreadDetail(ThreadId));
     }
+  const onDownVote = async()=>{
+    dispatch(asyncThreadDownVote(ThreadId));
+    dispatch(asyncReceiveThreadDetail(ThreadId));
+    }
 
   return (
       <>
@@ -42,6 +48,8 @@ function ThreadDetailPage() {
 
     <button onClick={onUpVote}>Up Vote</button>
     <UpVoteList upvotes={threadDetail?.upVotesBy}/>
+    <button onClick={onDownVote}>Down Vote</button>
+    <DownVoteList downVotes={threadDetail?.downVotesBy}/>
       </>
   );
 }

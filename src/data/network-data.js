@@ -99,7 +99,30 @@ async function getThreads(ThreadId) {
       return { error: true};
     }
     
-    return { error: false,upVote:responseJson?.data?.upVotesBy };
+    return { error: false,upVotes:responseJson?.data?.upVotesBy };
+  }
+
+  const threadDownUp=async(ThreadId)=> {
+    // const requestBody= JSON.stringify({
+    //   content
+    // })
+    const token =  getAccessToken()
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/down-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token,
+      },
+      // body: requestBody,
+    });
+    const responseJson = await response.json();
+  
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true};
+    }
+    
+    return { error: false,downVotes:responseJson?.data?.downVotesBy };
   }
 
   async function register({name,email,password}) {
@@ -191,5 +214,6 @@ async function getThreads(ThreadId) {
       myAccount,
       addThread,
       addComment,
-      threadVoteUp
+      threadVoteUp,
+      threadDownUp
   }

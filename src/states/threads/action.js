@@ -1,5 +1,5 @@
 import mockAPI from '../../data/mockAPI';
-import { addComment, addThread, getThreads, threadVoteUp } from '../../data/network-data';
+import { addComment, addThread, getThreads, threadDownUp, threadVoteUp } from '../../data/network-data';
 
 function asyncReceiveThreads() {
   return async (dispatch) => {
@@ -35,6 +35,12 @@ function asyncThreadUpVote(ThreadId){
   return async (dispatch) => {
     const {vote} = await threadVoteUp(ThreadId);
     dispatch(receiveThreadUpVoteActionCreator(vote));
+  };
+}
+function asyncThreadDownVote(ThreadId){
+  return async (dispatch) => {
+    const {vote} = await threadDownUp(ThreadId);
+    dispatch(receiveThreadDownVoteActionCreator(vote));
   };
 }
 
@@ -100,6 +106,17 @@ function receiveThreadUpVoteActionCreator({id,userId,threadId,voteType}) {
       }
     };
   }
+function receiveThreadDownVoteActionCreator({id,userId,threadId,voteType}) {
+    return {
+      type: 'THREAD_DOWNVOTE',
+      payload: {
+        id,
+        userId,
+        threadId,
+        voteType
+      }
+    };
+  }
 
 export {
   asyncReceiveThreads,
@@ -109,5 +126,6 @@ export {
   asyncAddThread,
   asyncAddComment,
   receiveAddCommentActionCreator,
-  asyncThreadUpVote
+  asyncThreadUpVote,
+  asyncThreadDownVote
 };
