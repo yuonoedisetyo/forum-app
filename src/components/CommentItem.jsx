@@ -2,6 +2,8 @@ import React from 'react';
 import { DummyProfil } from '../assets';
 import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
+import DownVoteList from './DownVoteList';
+import UpVoteList from './UpVoteList';
 
 // {
 //     "id": "comment-XhqYiuyhZm1mWHqn",
@@ -30,6 +32,8 @@ function CommentItem({ id,content,createdAt,upVotesBy,downVotesBy,commentUpVote,
         <button onClick={()=>commentUpVote(id)}>Comment Up Vote</button>
         <button onClick={()=>commentDownVote(id)}>Comment Down Vote</button>
         <button onClick={()=>commentNeutralVote(id)}>Comment Neutral Vote</button>
+        <UpVoteList upVotes={upVotesBy}/>
+        <DownVoteList downVotes={downVotesBy}/>
       </div>
     </div>
   );

@@ -39,20 +39,20 @@ function asyncThreadUpVote(ThreadId){
 }
 function asyncCommentUpVote({ThreadId,CommentId}){
   return async (dispatch) => {
-    const {vote} = await commentVoteUp({ThreadId,CommentId});
-    dispatch(receiveCommentUpVoteActionCreator(vote));
+    const {upVotes} = await commentVoteUp({ThreadId,CommentId});
+    dispatch(receiveCommentUpVoteActionCreator(upVotes));
   };
 }
 function asyncCommentDownVote({ThreadId,CommentId}){
   return async (dispatch) => {
-    const {vote} = await commentDownVote({ThreadId,CommentId});
-    dispatch(receiveCommentDownVoteActionCreator(vote));
+    const {downVotes} = await commentDownVote({ThreadId,CommentId});
+    dispatch(receiveCommentDownVoteActionCreator(downVotes));
   };
 }
 function asyncCommentNeutralVote({ThreadId,CommentId}){
   return async (dispatch) => {
-    const {vote} = await commentNeutralVote({ThreadId,CommentId});
-    dispatch(receiveCommentNeutralVoteActionCreator(vote));
+    const {neutralVotes} = await commentNeutralVote({ThreadId,CommentId});
+    dispatch(receiveCommentNeutralVoteActionCreator(neutralVotes));
   };
 }
 function asyncThreadDownVote(ThreadId){
@@ -152,35 +152,36 @@ function receiveThreadNeutralVoteActionCreator({id,userId,threadId,voteType}) {
       }
     };
   }
-function receiveCommentUpVoteActionCreator({id,userId,threadId,voteType}) {
+function receiveCommentUpVoteActionCreator({id,userId,commentId,voteType}) {
     return {
       type: 'COMMENT_UPVOTE',
       payload: {
         id,
         userId,
-        threadId,
+        commentId,
         voteType
       }
     };
   }
-function receiveCommentDownVoteActionCreator({id,userId,threadId,voteType}) {
+function receiveCommentDownVoteActionCreator({id,userId,commentId,voteType}) {
     return {
       type: 'COMMENT_DOWNVOTE',
       payload: {
         id,
         userId,
-        threadId,
+        commentId,
         voteType
       }
     };
   }
-function receiveCommentNeutralVoteActionCreator({id,userId,threadId,voteType}) {
+
+function receiveCommentNeutralVoteActionCreator({id,userId,commentId,voteType}) {
     return {
       type: 'COMMENT_NEUTRALVOTE',
       payload: {
         id,
         userId,
-        threadId,
+        commentId,
         voteType
       }
     };

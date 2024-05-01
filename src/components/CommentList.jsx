@@ -1,8 +1,8 @@
 import React from 'react';
 import CommentItem from './CommentItem';
 
-function CommentsList({comments,commentUpVote, commentDownVote}) {
-
+function CommentsList({comments,commentUpVote, commentDownVote,commentNeutralVote}) {
+console.log("comments ",comments)
   return (
     <div style={{}}>
       <h3>Comments</h3>
