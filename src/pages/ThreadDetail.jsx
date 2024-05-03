@@ -12,7 +12,6 @@ import {
     asyncCommentNeutralVote,
     asyncCommentUpVote,
     asyncReceiveThreadDetail,
-    asyncReceiveThreads,
     asyncThreadDownVote,
     asyncThreadNeutralVote,
     asyncThreadUpVote,

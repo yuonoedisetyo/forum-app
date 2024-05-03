@@ -6,9 +6,10 @@ import { thunk } from './middleware'
 import monitorReducersEnhancer from './enhancers/monitorReducers'
 import loggerMiddleware from './middleware/logger'
 import rootReducer from './rootReducers'
+import { loadingBarMiddleware } from 'react-redux-loading-bar'
 
 export default function configureStore(preloadedState) {
-  const middlewares = [loggerMiddleware, thunk]
+  const middlewares = [loggerMiddleware, thunk,loadingBarMiddleware()]
   const middlewareEnhancer = applyMiddleware(...middlewares)
 
 

@@ -1,11 +1,15 @@
 import mockAPI from '../../data/mockAPI';
 import { addComment, addThread, commentDownVote, commentNeutralVote, commentVoteUp, getThreads, threadDownVote, threadNeutralVote, threadVoteUp } from '../../data/network-data';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
 
 function asyncReceiveThreads() {
+  console.log("asyncReceiveThreads-- ")
   return async (dispatch) => {
+    // dispatch(showLoading());
     // const threads = await mockAPI.getTodos();
     const threads = await getThreads();
     dispatch(receiveThreadsActionCreator(threads));
+    // dispatch(hideLoading());
   };
 }
 

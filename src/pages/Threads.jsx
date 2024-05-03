@@ -6,12 +6,14 @@ import {
   asyncAddThread,
   asyncReceiveThreads,
 } from '../states/threads/action';
+import LoadingBar from 'react-redux-loading-bar';
 
 function Threads() {
   const threads = useSelector((states) => states.threads);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("dispatch(asyncReceiveThreads())")
     dispatch(asyncReceiveThreads());
   }, [dispatch]);
 
@@ -32,6 +34,7 @@ function Threads() {
 
   return (
     <>
+    {/* <LoadingBar /> */}
       <ThreadInput addThread={onAddThread} />
       <ThreadsList threads={threads} />
     </>
