@@ -1,4 +1,4 @@
-import { loadingBarReducer } from 'react-redux-loading-bar/build';
+
 import { accountReducer } from './account/reducer';
 import { leaderBoardsReducer } from './leaderboards/reducers';
 import { loadingActionCreator } from './loading/action';

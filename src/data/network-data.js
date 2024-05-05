@@ -1,6 +1,9 @@
+import { useNavigation } from "react-router-dom";
+
 const BASE_URL = 'https://forum-api.dicoding.dev/v1';
 
 function getAccessToken() {
+  // return null
   return localStorage.getItem('accessToken');
 }
 
@@ -8,12 +11,26 @@ function putAccessToken(accessToken) {
   return localStorage.setItem('accessToken', accessToken);
 }
 
+function getUsersFromStorage() {
+  // return null
+  return JSON.parse(localStorage.getItem('users'));
+}
+
+function putUsersFromStorage(users) {
+  return localStorage.setItem('users', JSON.stringify(users));
+}
+
 async function fetchWithToken(url, options = {}) {
+  const token = getAccessToken()
+  if(!token) {
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   return fetch(url, {
     ...options,
     headers: {
       ...options.headers,
-      Authorization: `Bearer ${getAccessToken()}`,
+      Authorization: `Bearer ${token}`,
     },
   });
 }
@@ -38,6 +55,10 @@ const addThread = async ({ title, body, category }) => {
     category
   })
   const token = getAccessToken()
+  if(!token) {
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   const response = await fetch(`${BASE_URL}/threads`, {
     method: 'POST',
     headers: {
@@ -61,6 +82,10 @@ const addComment = async ({ content, ThreadId }) => {
     content
   })
   const token = getAccessToken()
+  if(!token) {
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments`, {
     method: 'POST',
     headers: {
@@ -84,6 +109,10 @@ const threadVoteUp = async (ThreadId) => {
   //   content
   // })
   const token = getAccessToken()
+  if(!token) {
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   const response = await fetch(`${BASE_URL}/threads/${ThreadId}/up-vote`, {
     method: 'POST',
     headers: {
@@ -106,6 +135,10 @@ const commentVoteUp = async ({ ThreadId, CommentId }) => {
   //   content
   // })
   const token = getAccessToken()
+  if(!token) {
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/up-vote`, {
     method: 'POST',
     headers: {
@@ -128,6 +161,10 @@ const commentDownVote = async ({ ThreadId, CommentId }) => {
   //   content
   // })
   const token = getAccessToken()
+  if(!token) {
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/down-vote`, {
     method: 'POST',
     headers: {
@@ -150,6 +187,10 @@ const commentNeutralVote = async ({ ThreadId, CommentId }) => {
   //   content
   // })
   const token = getAccessToken()
+  if(!token) {
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/neutral-vote`, {
     method: 'POST',
     headers: {
@@ -168,11 +209,20 @@ const commentNeutralVote = async ({ ThreadId, CommentId }) => {
   return { error: false, neutralVotes: responseJson?.data?.vote };
 }
 
+// const navigation = useNavigation()
+
 const threadDownVote = async (ThreadId) => {
   // const requestBody= JSON.stringify({
   //   content
   // })
   const token = getAccessToken()
+  console.log("threadDownVote token ",token)
+  if(!token) {
+    
+    // navigation.navigate("/")
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   const response = await fetch(`${BASE_URL}/threads/${ThreadId}/down-vote`, {
     method: 'POST',
     headers: {
@@ -195,6 +245,10 @@ const threadNeutralVote = async (ThreadId) => {
   //   content
   // })
   const token = getAccessToken()
+  if(!token) {
+    location.href="/login"
+    return { error: true,errorCode:"2", errorMessage:"Harus Login terlebih dahulu" };
+  }
   const response = await fetch(`${BASE_URL}/threads/${ThreadId}/neutral-vote`, {
     method: 'POST',
     headers: {
@@ -269,6 +323,9 @@ async function myAccount() {
   console.log("fetch")
 
   const response = await fetchWithToken(`${BASE_URL}/users/me`);
+  if(response?.errorCode==="2"){
+    return response
+  }
   const responseJson = await response.json();
   console.log("response ", response)
 
@@ -304,6 +361,7 @@ async function getUsers(UserId) {
   //   return responseJson?.data?.detailThread
   // }
   console.log("responseJson?.data ", responseJson?.data)
+  putUsersFromStorage(responseJson?.data?.users)
   return responseJson?.data?.users;
 }
 
@@ -321,5 +379,7 @@ export {
   commentVoteUp,
   commentDownVote,
   commentNeutralVote,
-  getLeaderBoards
+  getLeaderBoards,
+  getUsersFromStorage,
+  putUsersFromStorage
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import LoadingBar from './common/LoadingBar';
 
 function ThreadInput({ addThread, loading }) {
     const [title, onTitleChange] = useInput('');
@@ -28,6 +29,7 @@ function ThreadInput({ addThread, loading }) {
             <input type="text" name="title" placeholder='Title' value={title} onChange={onTitleChange} />
             <input type="text" name="body" placeholder='Body' value={body} onChange={onBodyChange} />
             <input type="text" name="category" placeholder='Category' value={category} onChange={onCategoryChange} />
+            <LoadingBar/>
             <button disabled={loading}>{loading ? 'Loading ...' : "Create Thread"}</button>
         </form>
     );

@@ -1,5 +1,6 @@
 import React from 'react';
 import useInput from '../hooks/useInput';
+import LoadingBar from './common/LoadingBar';
 
 function RegisterInput({ register }) {
 
@@ -34,6 +35,7 @@ function RegisterInput({ register }) {
         <input type="text" name="email" value={email} onChange={onEmailChange} />
         <input type="text" name="name" value={name} onChange={onNameChange} />
         <input type="text" name="password" value={password} onChange={onPasswordChange} />
+        <LoadingBar/>
         <button type='submit'
         // onClick={()=>register({name,email,password})}
         >Simpan</button>

@@ -42,6 +42,10 @@ const router = createBrowserRouter([
     element: <ThreadDetail />,
   },
   {
+    path: "users/:UserId",
+    element: <ThreadDetail />,
+  },
+  {
     path: "register",
     element: <RegisterPage />,
   },

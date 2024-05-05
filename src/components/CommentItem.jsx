@@ -18,15 +18,16 @@ import UpVoteList from './UpVoteList';
 //     "downVotesBy": []
 // }
 
-function CommentItem({ id, content, createdAt, upVotesBy, downVotesBy, commentUpVote, commentDownVote, commentNeutralVote }) {
+function CommentItem({ id, content, createdAt,owner, upVotesBy, downVotesBy, commentUpVote, commentDownVote, commentNeutralVote }) {
     return (
         <div style={{ backgroundColor: 'yellow', marginTop: 8, borderRadius: 12, padding: 12 }}>
             <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex' }}>
-                <img src={DummyProfil} style={{ height: 32, width: 32, alignSelf: 'center', marginRight: 8 }} />
-                {/* <label>{content}</label> */}
+                <img src={owner?.avatar} style={{ height: 32, width: 32, alignSelf: 'center', marginRight: 8 }} />
+                <label>{owner?.name}</label>
             </div>
             <div style={{ height: 8 }}></div>
             <div style={{ textAlign: 'left' }}>
+                <label>{createdAt}</label>
                 {/* <label style={{ fontWeight: 'bold' }}>{title}</label> */}
                 <p style={{ WebkitLineClamp: 4, display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical' }}>{parse(content)}</p>
                 <button onClick={() => commentUpVote(id)}>Comment Up Vote</button>

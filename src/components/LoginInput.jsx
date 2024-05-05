@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import LoadingBar from './common/LoadingBar';
 
 function LoginInput({ login, loading }) {
     const [email, onEmailChange] = useInput('');
@@ -26,6 +27,7 @@ function LoginInput({ login, loading }) {
         <form onSubmit={onSubmitHandler}>
             <input type="email" name="email" placeholder='Email' value={email} onChange={onEmailChange} />
             <input type="password" name="password" placeholder='Password' value={password} onChange={onPasswordChange} />
+            <LoadingBar/>
             <button disabled={loading}>{loading ? 'Logging in..' : "Masuk"}</button>
         </form>
     );

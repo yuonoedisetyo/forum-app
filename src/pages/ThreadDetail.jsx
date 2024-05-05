@@ -40,7 +40,7 @@ function ThreadDetailPage() {
     }
     const onDownVote = async () => {
         dispatch(asyncThreadDownVote(ThreadId));
-        dispatch(asyncReceiveThreadDetail(ThreadId));
+        // dispatch(asyncReceiveThreadDetail(ThreadId));
     }
     const onNeutralVote = async () => {
         dispatch(asyncThreadNeutralVote(ThreadId));
@@ -61,9 +61,10 @@ function ThreadDetailPage() {
 
     return (
         <>
-            <ThreadDetail title={threadDetail?.title} body={threadDetail?.body} />
+            <ThreadDetail title={threadDetail?.title} body={threadDetail?.body} {...threadDetail} />
             <CommentsList comments={threadDetail?.comments} commentUpVote={onCommentUpVote} commentDownVote={onCommentDownVote}
-                commentNeutralVote={onCommentNeutralVote} />
+                commentNeutralVote={onCommentNeutralVote} 
+                />
             <CommentInput addComment={onAddComment} />
 
             <button onClick={onUpVote}>Up Vote</button>
