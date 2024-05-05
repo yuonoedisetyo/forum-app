@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingBar from './common/LoadingBar';
 import ThreadItem from './ThreadItem';
 
 function ThreadsList({ threads }) {
@@ -7,7 +8,7 @@ function ThreadsList({ threads }) {
     <div style={{}}>
       <h3>My Threads</h3>
       {/* <ThreadInput addThread={onAddThread} /> */}
-
+      <LoadingBar/>
       {threads?.map((thread) => (
         <ThreadItem {...thread}
         // toggleThread={onToggleThread} 

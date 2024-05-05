@@ -1,74 +1,94 @@
 import mockAPI from '../../data/mockAPI';
 import { addComment, addThread, commentDownVote, commentNeutralVote, commentVoteUp, getThreads, threadDownVote, threadNeutralVote, threadVoteUp } from '../../data/network-data';
-import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import { hideLoading, showLoading } from '../loading/action';
 
 function asyncReceiveThreads() {
   console.log("asyncReceiveThreads-- ")
   return async (dispatch) => {
     // dispatch(showLoading());
+    dispatch(showLoading())
     // const threads = await mockAPI.getTodos();
     const threads = await getThreads();
     dispatch(receiveThreadsActionCreator(threads));
     // dispatch(hideLoading());
+    dispatch(hideLoading())
   };
 }
 
 function asyncReceiveThreadDetail(ThreadId) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const threadDetail = await getThreads(ThreadId);
     dispatch(receiveThreadDetailActionCreator(threadDetail));
+    dispatch(hideLoading())
   };
 }
 
 function asyncAddThread(formData) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const { thread } = await addThread(formData);
     dispatch(receiveAddThreadActionCreator(thread));
+    dispatch(hideLoading())
   };
 
 }
 
 function asyncAddComment(formData) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const { comment } = await addComment(formData);
     dispatch(receiveAddCommentActionCreator(comment));
+    dispatch(hideLoading())
   };
 }
 
 function asyncThreadUpVote(ThreadId) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const { vote } = await threadVoteUp(ThreadId);
     dispatch(receiveThreadUpVoteActionCreator(vote));
+    dispatch(hideLoading())
   };
 }
 function asyncCommentUpVote({ ThreadId, CommentId }) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const { upVotes } = await commentVoteUp({ ThreadId, CommentId });
     dispatch(receiveCommentUpVoteActionCreator(upVotes));
+    dispatch(hideLoading())
   };
 }
 function asyncCommentDownVote({ ThreadId, CommentId }) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const { downVotes } = await commentDownVote({ ThreadId, CommentId });
     dispatch(receiveCommentDownVoteActionCreator(downVotes));
+    dispatch(hideLoading())
   };
 }
 function asyncCommentNeutralVote({ ThreadId, CommentId }) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const { neutralVotes } = await commentNeutralVote({ ThreadId, CommentId });
     dispatch(receiveCommentNeutralVoteActionCreator(neutralVotes));
+    dispatch(hideLoading())
   };
 }
 function asyncThreadDownVote(ThreadId) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const { vote } = await threadDownVote(ThreadId);
     dispatch(receiveThreadDownVoteActionCreator(vote));
+    dispatch(hideLoading())
   };
 }
 function asyncThreadNeutralVote(ThreadId) {
   return async (dispatch) => {
+    dispatch(showLoading())
     const { vote } = await threadNeutralVote(ThreadId);
     dispatch(receiveThreadNeutralVoteActionCreator(vote));
+    dispatch(hideLoading())
   };
 }
 

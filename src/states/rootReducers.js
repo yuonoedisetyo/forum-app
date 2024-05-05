@@ -1,7 +1,9 @@
+import { loadingBarReducer } from 'react-redux-loading-bar/build';
 import { accountReducer } from './account/reducer';
 import { leaderBoardsReducer } from './leaderboards/reducers';
+import { loadingActionCreator } from './loading/action';
+import { loadingReducer } from './loading/reducer';
 import { commentsReducer, threadsReducer } from './threads/reducer';
-import { loadingBarReducer } from 'react-redux-loading-bar';
 
 function rootReducer(state = {}, action = {}) {
   return {
@@ -14,6 +16,7 @@ function rootReducer(state = {}, action = {}) {
     comments: commentsReducer(state.comments, action),
     leaderboards: leaderBoardsReducer(state.leaderboards, action),
     // loadingBar: loadingBarReducer,
+    loading:loadingReducer(state.loading,action)
   };
 }
 

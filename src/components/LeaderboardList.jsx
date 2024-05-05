@@ -1,4 +1,5 @@
 import React from 'react';
+import LoadingBar from './common/LoadingBar';
 
 function LeaderboardList({ leaderboards }) {
 
@@ -6,7 +7,7 @@ function LeaderboardList({ leaderboards }) {
         <div style={{}}>
             <h3>Users</h3>
             {/* <ThreadInput addThread={onAddThread} /> */}
-
+            <LoadingBar/>
             {leaderboards?.map((leaderboard) => (
                 <>
                     <label>{leaderboard?.user?.name}</label>
