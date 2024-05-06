@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { DummyProfil } from '../assets';
 import parse from 'html-react-parser';
 import { Link } from 'react-router-dom';
-import { getUsersFromStorage } from '../data/network-data';
+import { getThreads, getUsersFromStorage } from '../data/network-data';
 
 function ThreadItem({ id, title, body, ownerId,createdAt,totalComments }) {
 
-  const dataUser = getUsersFromStorage();
-  console.log("datauser ",dataUser)
-  const dataUserFiltered = dataUser.filter((item,index)=>{
-    return item?.id===ownerId
-  })
-  console.log("dataUserFiltered ",dataUserFiltered)
+  // const dataUser = getUsersFromStorage();
+  // console.log("datauser ",dataUser)
+  // const dataUserFiltered = dataUser.filter((item,index)=>{
+  //   return item?.id===ownerId
+  // })
+  // console.log("dataUserFiltered ",dataUserFiltered)
+  const [threadDetail,setThreadDetail] = useState("")
+
+  useEffect(() => {
+      // dispatch(asyncReceiveThreadDetail(id));
+
+      async function start(){
+        const threadDetail = await getThreads(id);
+        setThreadDetail(threadDetail)
+      }
+      start();
+  }, []);
 
   return (
     <Link to={`/thread/${id}`}>
       <div style={{ backgroundColor: 'yellow', marginTop: 8, borderRadius: 12, padding: 12 }}>
         <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex' }}>
-          <img src={dataUserFiltered[0]?.avatar} style={{ height: 32, width: 32, alignSelf: 'center', marginRight: 8 }} />
-          {/* <label>{ownerId}</label><br/> */}
-          <label>{dataUserFiltered[0]?.name}</label>
+          {/* <img src={dataUserFiltered[0]?.avatar} style={{ height: 32, width: 32, alignSelf: 'center', marginRight: 8 }} />
+          <label>{dataUserFiltered[0]?.name}</label> */}
+          <img src={threadDetail?.owner?.avatar} style={{ height: 32, width: 32, alignSelf: 'center', marginRight: 8 }} />
+          <label>{threadDetail?.owner?.name}</label>
         </div>
         <div style={{ height: 8 }}></div>
         <div style={{ textAlign: 'left' }}>
