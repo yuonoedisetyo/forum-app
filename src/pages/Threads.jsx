@@ -12,24 +12,12 @@ function Threads() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("dispatch(asyncReceiveThreads())")
     dispatch(asyncReceiveThreads());
   }, [dispatch]);
 
-
   const onAddThread = async (formdata) => {
     dispatch(asyncAddThread(formdata));
-  }
-
-  // function onToggleThread(id) {
-  //   dispatch(toggleThreadActionCreator(id));
-  // }
-
-  // function onDeleteThread(id) {
-  //   dispatch(deleteThreadActionCreator(id));
-  // }
-
-  console.log("threads1 ", threads)
+  };
 
   return (
     <>

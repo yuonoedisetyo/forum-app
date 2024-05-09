@@ -1,11 +1,8 @@
 function loadingReducer(loading = false, action = {}) {
-  
-    if (action.type === 'LOADING') {
-      return action.payload.loading;
-    }
-    return loading;
+  if (action.type === 'LOADING') {
+    return action.payload.loading;
   }
-  
-  
-  export { loadingReducer };
-  
+  return loading;
+}
+
+export { loadingReducer };

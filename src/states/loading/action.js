@@ -1,27 +1,25 @@
-import { useDispatch } from "react-redux";
-
-function loadingActionCreator( loading =false) {
-    return {
-        type: 'LOADING',
-        payload: {
-            loading
-        }
-    };
+function loadingActionCreator(loading = false) {
+  return {
+    type: 'LOADING',
+    payload: {
+      loading,
+    },
+  };
 }
 
-function showLoading(){
-    return async (dispatch) => {
-        dispatch(loadingActionCreator(true))
-      };
+function showLoading() {
+  return async (dispatch) => {
+    dispatch(loadingActionCreator(true));
+  };
 }
-function hideLoading(){
-    return async (dispatch) => {
-        dispatch(loadingActionCreator(false))
-      };
+function hideLoading() {
+  return async (dispatch) => {
+    dispatch(loadingActionCreator(false));
+  };
 }
 
 export {
-    loadingActionCreator,
-    showLoading,
-    hideLoading
-}
+  loadingActionCreator,
+  showLoading,
+  hideLoading,
+};

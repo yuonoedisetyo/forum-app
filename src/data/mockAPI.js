@@ -1,26 +1,46 @@
+function getTodosFromStorage() {
+  const todosData = localStorage.getItem('todos');
+
+  if (!todosData) {
+    return null;
+  }
+
+  return JSON.parse(todosData);
+}
+
+function getGoalsFromStorage() {
+  const goalsData = localStorage.getItem('goals');
+
+  if (!goalsData) {
+    return null;
+  }
+
+  return JSON.parse(goalsData);
+}
+
 const mockAPI = (() => {
   let todos = getTodosFromStorage() || [
     {
       id: 'todo-1664268511621',
       text: 'Mencuci sepeda motor',
-      complete: false
+      complete: false,
     },
     {
       id: 'todo-1664268553422',
       text: 'Menjemput adik sekolah',
-      complete: false
-    }
+      complete: false,
+    },
   ];
 
   let goals = getGoalsFromStorage() || [
     {
       id: 'goal-1664268511621',
-      text: 'Belajar React'
+      text: 'Belajar React',
     },
     {
       id: 'goal-1664268511622',
-      text: 'Belajar Redux'
-    }
+      text: 'Belajar Redux',
+    },
   ];
 
   function saveTodosToStorage() {
@@ -29,26 +49,6 @@ const mockAPI = (() => {
 
   function saveGoalsToStorage() {
     localStorage.setItem('goals', JSON.stringify(goals));
-  }
-
-  function getTodosFromStorage() {
-    const todos = localStorage.getItem('todos');
-
-    if (!todos) {
-      return null;
-    }
-
-    return JSON.parse(todos);
-  }
-
-  function getGoalsFromStorage() {
-    const goals = localStorage.getItem('goals');
-
-    if (!goals) {
-      return null;
-    }
-
-    return JSON.parse(goals);
   }
 
   function mockRequest(action) {
@@ -64,7 +64,7 @@ const mockAPI = (() => {
       const newTodo = {
         id: `todo-${+new Date()}`,
         text,
-        complete: false
+        complete: false,
       };
 
       todos = [...todos, newTodo];
@@ -76,10 +76,7 @@ const mockAPI = (() => {
   }
 
   function getTodos() {
-    console.log("mock data todos ", todos)
-    return mockRequest(() => {
-      return JSON.parse(JSON.stringify(todos));
-    });
+    return mockRequest(() => JSON.parse(JSON.stringify(todos)));
   }
 
   function deleteTodo(id) {
@@ -111,7 +108,7 @@ const mockAPI = (() => {
     return mockRequest(() => {
       const newGoal = {
         id: `goal-${+new Date()}`,
-        text
+        text,
       };
 
       goals = [...goals, newGoal];
@@ -123,9 +120,7 @@ const mockAPI = (() => {
   }
 
   function getGoals() {
-    return mockRequest(() => {
-      return JSON.parse(JSON.stringify(goals));
-    });
+    return mockRequest(() => JSON.parse(JSON.stringify(goals)));
   }
 
   function deleteGoal(id) {
@@ -142,7 +137,7 @@ const mockAPI = (() => {
     toggleTodo,
     addGoal,
     getGoals,
-    deleteGoal
+    deleteGoal,
   };
 })();
 

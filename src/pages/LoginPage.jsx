@@ -1,17 +1,16 @@
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import LoginInput from '../components/LoginInput';
 import { asyncLogin } from '../states/account/action';
 
-function LoginPage({ loginSuccess }) {
+function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((states) => states.token);
 
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [loading] = useState(false);
+  const [errorMessage] = useState('');
 
   // async function onLogin({ email, password }) {
   //   setLoading(true)
@@ -30,27 +29,28 @@ function LoginPage({ loginSuccess }) {
 
   const onLogin = async (formdata) => {
     dispatch(asyncLogin(formdata));
-  }
+  };
 
   useEffect(() => {
-    console.log("token ", token)
     if (token) {
-      navigate("/")
+      navigate('/');
     }
-  }, [token])
+  }, [token]);
 
   return (
     // <>
     //   {!loadingUser &&
-    <section >
-      <h2>{"Silakan masuk untuk melanjutkan ..."}</h2>
+    <section>
+      <h2>Silakan masuk untuk melanjutkan ...</h2>
       <LoginInput login={onLogin} loading={loading} />
-      {loading ?
-        <h1>Sedang memuat data ...</h1>
-        :
-        errorMessage && <p>{errorMessage}</p>
-      }
-      <p>{"Belum punya akun?"} <Link to="/register">{"Daftar di sini."}</Link></p>
+      {loading
+        ? <h1>Sedang memuat data ...</h1>
+        : errorMessage && <p>{errorMessage}</p>}
+      <p>
+        Belum punya akun?
+        {' '}
+        <Link to="/register">Daftar di sini.</Link>
+      </p>
     </section>
     //   }
     // </>
@@ -58,7 +58,6 @@ function LoginPage({ loginSuccess }) {
 }
 
 LoginPage.propTypes = {
-  loginSuccess: PropTypes.func.isRequired,
-}
+};
 
 export default LoginPage;

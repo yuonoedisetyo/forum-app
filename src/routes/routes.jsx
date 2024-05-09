@@ -1,43 +1,49 @@
-export default function Root() {
-  return (
-    <>
-      <div id="sidebar">
-        <h1>React Router Contacts</h1>
-        <div>
-          <form id="search-form" role="search">
-            <input
-              id="q"
-              aria-label="Search contacts"
-              placeholder="Search"
-              type="search"
-              name="q"
-            />
-            <div
-              id="search-spinner"
-              aria-hidden
-              hidden={true}
-            />
-            <div
-              className="sr-only"
-              aria-live="polite"
-            ></div>
-          </form>
-          <form method="post">
-            <button type="submit">New</button>
-          </form>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <a href={`/contacts/1`}>Your Name</a>
-            </li>
-            <li>
-              <a href={`/contacts/2`}>Your Friend</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div id="detail"></div>
-    </>
-  );
-}
+import { createBrowserRouter } from 'react-router-dom';
+import '../App.css';
+import React from 'react';
+import ThreadDetail from '../components/ThreadDetail';
+import Leaderboards from '../pages/Leaderboards';
+import LoginPage from '../pages/LoginPage';
+import MyAccount from '../pages/MyAccount';
+import RegisterPage from '../pages/RegisterPage';
+import Threads from '../pages/Threads';
+import Users from '../pages/Users';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    // element: <Root />,
+    // eslint-disable-next-line react/react-in-jsx-scope
+    element: <Threads />,
+  },
+  {
+    path: 'thread/:ThreadId',
+    element: <ThreadDetail />,
+  },
+  {
+    path: 'users/:UserId',
+    element: <ThreadDetail />,
+  },
+  {
+    path: 'register',
+    element: <RegisterPage />,
+  },
+  {
+    path: 'login',
+    element: <LoginPage />,
+  },
+  {
+    path: 'users',
+    element: <Users />,
+  },
+  {
+    path: 'myaccount',
+    element: <MyAccount />,
+  },
+  {
+    path: 'leaderboards',
+    element: <Leaderboards />,
+  },
+]);
+
+export default router;

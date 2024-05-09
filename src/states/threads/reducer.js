@@ -1,6 +1,5 @@
 function threadsReducer(threads = [], action = {}) {
   if (action.type === 'ADD_THREAD') {
-    console.log("ADD_THREAD threads ", threads)
     return [action.payload, ...threads];
   }
 
@@ -36,6 +35,6 @@ const commentsReducer = (comments = [], action = {}) => {
     return [action.payload, ...comments];
   }
   return comments;
-}
+};
 
 export { threadsReducer, commentsReducer };

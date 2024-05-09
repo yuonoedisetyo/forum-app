@@ -1,21 +1,65 @@
 module.exports = {
-  root: true,
-  env: { browser: true, es2020: true },
-  extends: [
-    'eslint:recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-  settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh'],
-  rules: {
-    'react/jsx-no-target-blank': 'off',
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb"
     ],
-  },
-}
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        'linebreak-style': 'off',
+        'no-alert': 'off',
+        'no-underscore-dangle': 'off',
+        'import/prefer-default-export': 'off',
+        'react/jsx-props-no-spreading': 'off',
+        'eol-last': 'off',
+        'react-hooks/rules-of-hooks':'off',
+        'react/jsx-no-useless-fragment':'off',
+        'eact-hooks/exhaustive-deps':'off'
+    },
+};
+
+// module.exports = {
+//     env: {
+//       browser: true,
+//       es2021: true,
+//       node: true,
+//     },
+//     extends: [
+//       'plugin:react/recommended',
+//       'airbnb',
+//     ],
+//     parserOptions: {
+//       ecmaFeatures: {
+//         jsx: true,
+//       },
+//       ecmaVersion: 12,
+//       sourceType: 'module',
+//     },
+//     plugins: [
+//       'react',
+//       'react-hooks',
+//     ],
+//     rules: {
+//       'linebreak-style': 'off',
+//       'no-alert': 'off',
+//       'no-underscore-dangle': 'off',
+//       'import/prefer-default-export': 'off',
+//       'react-hooks/rules-of-hooks': 'error',
+//       'react-hooks/exhaustive-deps': 'warn',
+//       'react/jsx-props-no-spreading': 'off',
+//       'eol-last': 'off',
+//     },
+//   };

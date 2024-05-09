@@ -1,7 +1,5 @@
-
 import { accountReducer } from './account/reducer';
 import { leaderBoardsReducer } from './leaderboards/reducers';
-import { loadingActionCreator } from './loading/action';
 import { loadingReducer } from './loading/reducer';
 import { commentsReducer, threadsReducer } from './threads/reducer';
 
@@ -16,7 +14,7 @@ function rootReducer(state = {}, action = {}) {
     comments: commentsReducer(state.comments, action),
     leaderboards: leaderBoardsReducer(state.leaderboards, action),
     // loadingBar: loadingBarReducer,
-    loading:loadingReducer(state.loading,action)
+    loading: loadingReducer(state.loading, action),
   };
 }
 
