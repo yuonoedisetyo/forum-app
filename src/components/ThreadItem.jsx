@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { getThreads } from '../data/network-data';
 
 function ThreadItem({
-  id, title, body, createdAt, totalComments,
+  id, title, body, createdAt, totalComments, category,
 }) {
   // const dataUser = getUsersFromStorage();
   // console.log("datauser ",dataUser)
@@ -46,6 +46,8 @@ function ThreadItem({
           <label htmlFor="title" style={{ fontWeight: 'bold' }}>{title}</label>
           <br />
           <label htmlFor="createat" style={{ fontWeight: 'bold' }}>{createdAt}</label>
+          <br />
+          <label htmlFor="category" style={{ fontWeight: 'bold' }}>{category}</label>
           <p style={{
             WebkitLineClamp: 4, display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical',
           }}
@@ -69,6 +71,7 @@ ThreadItem.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
   totalComments: PropTypes.number.isRequired,
 };
 
