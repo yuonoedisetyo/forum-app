@@ -27,39 +27,45 @@ function ThreadItem({
 
   return (
     <Link to={`/thread/${id}`}>
-      <div style={{
-        backgroundColor: 'yellow', marginTop: 8, borderRadius: 12, padding: 12,
-      }}
-      >
-        <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex' }}>
-          <img
-            alt="avatar"
-            src={threadDetail?.owner?.avatar}
-            style={{
-              height: 32, width: 32, alignSelf: 'center', marginRight: 8,
-            }}
-          />
-          <label htmlFor="name">{threadDetail?.owner?.name}</label>
+      <div className="thread-item">
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex' }}>
+            <img
+              alt="avatar"
+              src={threadDetail?.owner?.avatar}
+              style={{
+                height: 32, width: 32, alignSelf: 'center', marginRight: 8,
+              }}
+            />
+            <label htmlFor="name">{threadDetail?.owner?.name}</label>
+          </div>
+          <label htmlFor="category">{`#${category}`}</label>
         </div>
-        <div style={{ height: 8 }} />
+        <div style={{ height: 16 }} />
         <div style={{ textAlign: 'left' }}>
-          <label htmlFor="title" style={{ fontWeight: 'bold' }}>{title}</label>
+          <label htmlFor="title" style={{ fontWeight: 'bold', lineBreak: 'anywhere' }}>{title}</label>
           <br />
-          <label htmlFor="createat" style={{ fontWeight: 'bold' }}>{createdAt}</label>
           <br />
-          <label htmlFor="category" style={{ fontWeight: 'bold' }}>{category}</label>
           <p style={{
-            WebkitLineClamp: 4, display: '-webkit-box', overflow: 'hidden', WebkitBoxOrient: 'vertical',
+            WebkitLineClamp: 4,
+            display: '-webkit-box',
+            overflow: 'hidden',
+            WebkitBoxOrient: 'vertical',
+            lineBreak: 'anywhere',
           }}
           >
             {parse(body)}
           </p>
-          <label htmlFor="totalcomment" style={{ fontWeight: 'bold' }}>
-            {totalComments}
-            {' '}
-            komentar
-          </label>
           <br />
+          <br />
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <label htmlFor="totalcomment" style={{ fontWeight: 'bold' }}>
+              {totalComments}
+              {' '}
+              komentar
+            </label>
+            <label htmlFor="createat">{createdAt}</label>
+          </div>
         </div>
       </div>
     </Link>

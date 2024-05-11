@@ -6,8 +6,8 @@ import ThreadItem from './ThreadItem';
 function ThreadsList({ threads }) {
   return (
     <div style={{}}>
-      <h3>My Threads</h3>
-      {/* <ThreadInput addThread={onAddThread} /> */}
+      <h3>Threads</h3>
+      <div style={{ height: 8 }} />
       <LoadingBar />
       {threads?.map((thread) => (
         <ThreadItem {...thread} />

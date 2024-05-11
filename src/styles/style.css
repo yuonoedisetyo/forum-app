@@ -1,0 +1,180 @@
+:root {
+  --primary: #BB86FC;
+  --primary-variant: #3700B3;
+  --secondary: #03DAC6;
+  --background: #121212;
+  --surface: #121212;
+  --error: #CF6679;
+  --warning: #F39C12;
+  --on-background: #f8f8f8;
+  --on-surface: #FFFFFF;
+}
+
+[data-theme="light"] {
+  --background: #DDDDDD;
+  --suface: #514e4e;
+  --on-background: #333333;
+  --on-background-grey: #6d6d6d;
+  --on-surface: #333333;
+}
+
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--on-background);
+  text-decoration: inherit;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color:var(--on-background);
+}
+
+.app-container {
+  color: var(--on-background);
+  background-color: var(--background);
+  min-height: 100vh;
+  transition: all ease-in-out 0.5s;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid var(--on-background);
+  background-color: var(--secondary);
+  position: fixed;
+  width: 100%;
+}
+
+header .navigation {
+  display: flex;
+  padding: 16px;
+  font-size: 24px;
+  justify-content: flex-end;
+  margin: 0 8px;
+  color: var(--on-background);
+  width: 50%;
+}
+
+header .navigation h4{
+  margin-right: 20px;
+}
+
+/* header .navigation h4{
+  background-color: #DDDDDD;
+} */
+
+header .navigation h4:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+header .appname {
+  margin-left: 30px;
+  width: 30%;
+  text-align: left;
+}
+
+main {
+  margin: 0 auto;
+  padding-top: 120px;
+  padding-bottom: 50px;
+  width: 90%;
+  max-width: 1200px;
+}
+
+.main-container {
+  background-color: var(--on-background);
+  min-height: 100vh;
+}
+
+[data-placeholder]:empty::before {
+  content: attr(data-placeholder);
+  color: var(--on-background)
+}
+
+.thread-item {
+  background-color:#FFFFFF;
+  margin-top: 8px;
+  border-radius: 12px;
+  padding: 16px;
+  color:#514e4e;
+  /* border-width: 1px;
+  border-color: #03DAC6; */
+  /* border-style: solid; */
+}
+
+button {
+  background-color: #FFFFFF;
+  padding:12px 16px 12px 16px;
+  border-radius: 8px;
+  border-color: #03DAC6;
+  border-width: 1px;
+  border-style: groove;
+}
+
+button:hover {
+  border-color: #646cff;
+  cursor: pointer;
+}
+
+button:focus,
+button:focus-visible {
+  outline: 2px auto -webkit-focus-ring-color;
+}
+
+.category{
+  margin-right: 8px;
+}
+
+
+@media screen and (max-width: 650px) {
+
+  header .navigation {
+    display: flex;
+    padding: 1px;
+    font-size: 24px;
+    justify-content: flex-end;
+    margin: 0 8px;
+    color: var(--on-background);
+    width: 100%;
+  }
+
+  header .appname {
+    margin-left: 0px;
+    width: 50%;
+    text-align: left;
+  }
+
+  header .navigation h4{
+    margin-right: 10px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 650px) {
+
+  
+}
+
+@media screen and (min-width: 850px) {}
+
+@media screen and (min-width: 1200px) {}
+
+::placeholder {
+  color: var(--on-background);
+  opacity: 1;
+  /* Firefox */
+}
+
+header h2 {
+  flex: 1;
+  color: white;
+}

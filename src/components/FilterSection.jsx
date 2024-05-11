@@ -5,8 +5,10 @@ function FilterSection({ categories, onFilter }) {
   return (
     <div style={{}}>
       <h3>Kategori</h3>
+      <div style={{ height: 8 }} />
+      <button className="category" onClick={() => onFilter(null)} type="button">Semua Kategori</button>
       {categories?.map((item) => (
-        <button onClick={() => onFilter(item?.category)} type="button">{item?.category}</button>
+        <button className="category" onClick={() => onFilter(item?.category)} type="button">{item?.category}</button>
       ))}
     </div>
   );

@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Header from '../components/common/Header';
 import FilterSection from '../components/FilterSection';
 import ThreadInput from '../components/ThreadInput';
 import ThreadsList from '../components/ThreadsList';
@@ -41,14 +42,18 @@ function Threads() {
 
   return (
     <>
-      <FilterSection
-        categories={removeDuplicates(threads, 'category')}
-        onFilter={onFilterAction}
-      />
-      <ThreadInput addThread={onAddThread} />
-      <ThreadsList
-        threads={filterValue ? threads?.filter((item) => item.category === filterValue) : threads}
-      />
+      <Header />
+      <main>
+        <FilterSection
+          categories={removeDuplicates(threads, 'category')}
+          onFilter={onFilterAction}
+        />
+        <div style={{ height: 32 }} />
+        {/* <ThreadInput addThread={onAddThread} /> */}
+        <ThreadsList
+          threads={filterValue ? threads?.filter((item) => item.category === filterValue) : threads}
+        />
+      </main>
     </>
   );
 }
