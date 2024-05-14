@@ -1,11 +1,11 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import CommentInput from '../components/CommentInput';
-import CommentsList from '../components/CommentList';
-import DownVoteList from '../components/DownVoteList';
-import ThreadDetail from '../components/ThreadDetail';
-import UpVoteList from '../components/UpVoteList';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import CommentInput from "../components/CommentInput";
+import CommentsList from "../components/CommentList";
+import DownVoteList from "../components/DownVoteList";
+import ThreadDetail from "../components/ThreadDetail";
+import UpVoteList from "../components/UpVoteList";
 import {
   asyncAddComment,
   asyncCommentDownVote,
@@ -15,7 +15,8 @@ import {
   asyncThreadDownVote,
   asyncThreadNeutralVote,
   asyncThreadUpVote,
-} from '../states/threads/action';
+} from "../states/threads/action";
+import Header from "../components/common/Header";
 
 function ThreadDetailPage() {
   const threadDetail = useSelector((states) => states.threadDetail);
@@ -59,20 +60,33 @@ function ThreadDetailPage() {
 
   return (
     <>
-      <ThreadDetail title={threadDetail?.title} body={threadDetail?.body} {...threadDetail} />
-      <CommentsList
-        comments={threadDetail?.comments}
-        commentUpVote={onCommentUpVote}
-        commentDownVote={onCommentDownVote}
-        commentNeutralVote={onCommentNeutralVote}
-      />
-      <CommentInput addComment={onAddComment} />
+      <Header />
+      <main>
+        <ThreadDetail
+          title={threadDetail?.title}
+          body={threadDetail?.body}
+          {...threadDetail}
+        />
+        <CommentsList
+          comments={threadDetail?.comments}
+          commentUpVote={onCommentUpVote}
+          commentDownVote={onCommentDownVote}
+          commentNeutralVote={onCommentNeutralVote}
+        />
+        <CommentInput addComment={onAddComment} />
 
-      <button type="button" onClick={onUpVote}>Up Vote</button>
-      <UpVoteList upvotes={threadDetail?.upVotesBy} />
-      <button type="button" onClick={onDownVote}>Down Vote</button>
-      <DownVoteList downVotes={threadDetail?.downVotesBy} />
-      <button type="button" onClick={onNeutralVote}>Neutral Vote</button>
+        <button type="button" onClick={onUpVote}>
+          Up Vote
+        </button>
+        <UpVoteList upvotes={threadDetail?.upVotesBy} />
+        <button type="button" onClick={onDownVote}>
+          Down Vote
+        </button>
+        <DownVoteList downVotes={threadDetail?.downVotesBy} />
+        <button type="button" onClick={onNeutralVote}>
+          Neutral Vote
+        </button>
+      </main>
     </>
   );
 }

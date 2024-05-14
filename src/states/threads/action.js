@@ -149,6 +149,7 @@ function asyncReceiveThreads() {
 }
 
 function asyncReceiveThreadDetail(ThreadId) {
+  console.log("asyncReceiveThreadDetail ")
   return async (dispatch) => {
     dispatch(showLoading());
     const threadDetail = await getThreads(ThreadId);
