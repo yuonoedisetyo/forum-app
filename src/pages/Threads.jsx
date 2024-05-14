@@ -1,13 +1,11 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Header from '../components/common/Header';
 import FilterSection from '../components/FilterSection';
-import ThreadInput from '../components/ThreadInput';
 import ThreadsList from '../components/ThreadsList';
 import {
   asyncAddThread,
-  asyncReceiveThreads,
+  asyncReceiveThreads
 } from '../states/threads/action';
 
 function Threads() {

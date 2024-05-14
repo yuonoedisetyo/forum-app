@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
+import TextArea from './common/TextArea';
 
 function CommentInput({ addComment, loading }) {
   const [content, onContentChange] = useInput('');
@@ -20,8 +21,11 @@ function CommentInput({ addComment, loading }) {
 
   return (
     <form onSubmit={onSubmitHandler}>
-      <input type="text" name="content" placeholder="Title" value={content} onChange={onContentChange} />
-      <button type="button" disabled={loading}>{loading ? 'Loading ...' : 'Create Comment'}</button>
+      <TextArea onInput={onContentChange} placeholder="Tuliskan komentar disini ..." />
+      <div style={{ height: 16 }} />
+      <div style={{ textAlign: 'right' }}>
+        <button type="button" disabled={loading}>{loading ? 'Loading ...' : 'Create Comment'}</button>
+      </div>
     </form>
   );
 }

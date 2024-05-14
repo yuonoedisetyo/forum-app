@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import CommentInput from "../components/CommentInput";
-import CommentsList from "../components/CommentList";
-import DownVoteList from "../components/DownVoteList";
-import ThreadDetail from "../components/ThreadDetail";
-import UpVoteList from "../components/UpVoteList";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import CommentInput from '../components/CommentInput';
+import CommentsList from '../components/CommentList';
+import DownVoteList from '../components/DownVoteList';
+import ThreadDetail from '../components/ThreadDetail';
+import UpVoteList from '../components/UpVoteList';
 import {
   asyncAddComment,
   asyncCommentDownVote,
@@ -15,8 +15,8 @@ import {
   asyncThreadDownVote,
   asyncThreadNeutralVote,
   asyncThreadUpVote,
-} from "../states/threads/action";
-import Header from "../components/common/Header";
+} from '../states/threads/action';
+import Header from '../components/common/Header';
 
 function ThreadDetailPage() {
   const threadDetail = useSelector((states) => states.threadDetail);
@@ -65,17 +65,24 @@ function ThreadDetailPage() {
         <ThreadDetail
           title={threadDetail?.title}
           body={threadDetail?.body}
+          onUpVote={onUpVote}
+          onDownVote={onDownVote}
+          // upVotesBy={upVotesBy}
+          // downVotesBy={downVotesBy}
+          onNeutralVote={onNeutralVote}
           {...threadDetail}
         />
+        <div style={{ height: 16 }} />
         <CommentsList
           comments={threadDetail?.comments}
           commentUpVote={onCommentUpVote}
           commentDownVote={onCommentDownVote}
           commentNeutralVote={onCommentNeutralVote}
         />
+        <div style={{ height: 16 }} />
         <CommentInput addComment={onAddComment} />
 
-        <button type="button" onClick={onUpVote}>
+        {/* <button type="button" onClick={onUpVote}>
           Up Vote
         </button>
         <UpVoteList upvotes={threadDetail?.upVotesBy} />
@@ -85,7 +92,7 @@ function ThreadDetailPage() {
         <DownVoteList downVotes={threadDetail?.downVotesBy} />
         <button type="button" onClick={onNeutralVote}>
           Neutral Vote
-        </button>
+        </button> */}
       </main>
     </>
   );

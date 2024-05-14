@@ -97,7 +97,7 @@ main {
 
 [data-placeholder]:empty::before {
   content: attr(data-placeholder);
-  color: var(--on-background)
+  color: '#514e4e'
 }
 
 .thread-item {
@@ -157,6 +157,23 @@ button:focus-visible {
     margin-right: 10px;
     font-size: 16px;
   }
+}
+
+.comment-input {
+  width: 100%;
+  background-color: white;
+  color: var(--background);
+  border: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  padding: 16px;
+  min-height: 200px;
+
+  border-width: 1px;
+    border-style: solid;
+    border-color: var(--secondary);
+    border-radius: 10px;
+    
 }
 
 @media screen and (min-width: 650px) {
