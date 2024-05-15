@@ -26,8 +26,9 @@
 }
 
 a {
-  color: var(--on-background);
+  color: var(--secondary);
   text-decoration: inherit;
+  cursor: pointer;
 }
 
 body {
@@ -176,6 +177,24 @@ button:focus-visible {
     
 }
 
+input {
+  background-color: white;
+  color: var(--background);
+  border: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+
+  border-width: 1px;
+    border-style: solid;
+    border-color: var(--secondary);
+    border-radius: 10px;
+    
+}
+
 @media screen and (min-width: 650px) {
 
   
@@ -186,7 +205,7 @@ button:focus-visible {
 @media screen and (min-width: 1200px) {}
 
 ::placeholder {
-  color: var(--on-background);
+  /* color: var(--on-background); */
   opacity: 1;
   /* Firefox */
 }

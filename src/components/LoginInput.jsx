@@ -23,8 +23,10 @@ function LoginInput({ login, loading }) {
   return (
     <form onSubmit={onSubmitHandler}>
       <input type="email" name="email" placeholder="Email" value={email} onChange={onEmailChange} />
+      <br/>
       <input type="password" name="password" placeholder="Password" value={password} onChange={onPasswordChange} />
       <LoadingBar />
+      <br/>
       <button type="button" disabled={loading}>{loading ? 'Logging in..' : 'Masuk'}</button>
     </form>
   );
