@@ -7,10 +7,10 @@ function DownVoteList({ downVotes }) {
     <div style={{ alignContent: 'center' }}>
       {/* <h3>Down Vote By</h3> */}
       <LoadingBar />
-      {downVotes?.map((downVote) => (
+      {/* {downVotes?.map((downVote) => (
         // eslint-disable-next-line jsx-a11y/label-has-associated-control
         <label>{downVote}</label>
-      ))}
+      ))} */}
       <label htmlFor="countDownvotes">{downVotes?.length || 0}</label>
     </div>
   );

@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import useInput from '../hooks/useInput';
-import LoadingBar from './common/LoadingBar';
+import PropTypes from "prop-types";
+import React from "react";
+import useInput from "../hooks/useInput";
+import LoadingBar from "./common/LoadingBar";
 
 function LoginInput({ login, loading }) {
-  const [email, onEmailChange] = useInput('');
-  const [password, onPasswordChange] = useInput('');
+  const [email, onEmailChange] = useInput("");
+  const [password, onPasswordChange] = useInput("");
 
   const onSubmitHandler = (event) => {
     // Cegah peramban memuat ulang halaman
@@ -22,12 +22,30 @@ function LoginInput({ login, loading }) {
 
   return (
     <form onSubmit={onSubmitHandler}>
-      <input type="email" name="email" placeholder="Email" value={email} onChange={onEmailChange} />
-      <br/>
-      <input type="password" name="password" placeholder="Password" value={password} onChange={onPasswordChange} />
+      <div style={{ height: 16 }} />
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={email}
+        onChange={onEmailChange}
+      />
+      <div style={{ height: 16 }} />
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={password}
+        onChange={onPasswordChange}
+      />
+      <div style={{ height: 16 }} />
       <LoadingBar />
-      <br/>
-      <button type="button" disabled={loading}>{loading ? 'Logging in..' : 'Masuk'}</button>
+      <div style={{ textAlign: "right" }}>
+        <button type="submit" disabled={loading}>
+          {loading ? "Logging in.." : "Masuk"}
+        </button>
+      </div>
+      <div style={{ height: 16 }} />
     </form>
   );
 }

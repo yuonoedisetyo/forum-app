@@ -179,8 +179,9 @@ function asyncAddComment(formData) {
 function asyncThreadUpVote(ThreadId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { vote } = await threadVoteUp(ThreadId);
-    dispatch(receiveThreadUpVoteActionCreator(vote));
+    const { upVotes } = await threadVoteUp(ThreadId);
+    console.log("upVotes ",upVotes)
+    // dispatch(receiveThreadUpVoteActionCreator(upVotes));
     dispatch(hideLoading());
   };
 }
@@ -211,8 +212,8 @@ function asyncCommentNeutralVote({ ThreadId, CommentId }) {
 function asyncThreadDownVote(ThreadId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { vote } = await threadDownVote(ThreadId);
-    dispatch(receiveThreadDownVoteActionCreator(vote));
+    const { downVotes } = await threadDownVote(ThreadId);
+    dispatch(receiveThreadDownVoteActionCreator(downVotes));
     dispatch(hideLoading());
   };
 }

@@ -39,7 +39,7 @@ function ThreadDetailPage() {
   };
   const onDownVote = async () => {
     dispatch(asyncThreadDownVote(ThreadId));
-    // dispatch(asyncReceiveThreadDetail(ThreadId));
+    dispatch(asyncReceiveThreadDetail(ThreadId));
   };
   const onNeutralVote = async () => {
     dispatch(asyncThreadNeutralVote(ThreadId));
@@ -58,6 +58,7 @@ function ThreadDetailPage() {
     dispatch(asyncReceiveThreadDetail(ThreadId));
   };
 
+  console.log("threadDetail?.upVotesBy ",threadDetail?.upVotesBy)
   return (
     <>
       <Header />
@@ -67,8 +68,8 @@ function ThreadDetailPage() {
           body={threadDetail?.body}
           onUpVote={onUpVote}
           onDownVote={onDownVote}
-          // upVotesBy={upVotesBy}
-          // downVotesBy={downVotesBy}
+          upVotesBy={threadDetail?.upVotesBy}
+          downVotesBy={threadDetail?.downVotesBy}
           onNeutralVote={onNeutralVote}
           {...threadDetail}
         />

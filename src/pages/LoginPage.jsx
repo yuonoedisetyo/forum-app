@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import LoginInput from '../components/LoginInput';
-import { asyncLogin } from '../states/account/action';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import LoginInput from "../components/LoginInput";
+import { asyncLogin } from "../states/account/action";
+import Header from "../components/common/Header";
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ function LoginPage() {
   const token = useSelector((states) => states.token);
 
   const [loading] = useState(false);
-  const [errorMessage] = useState('');
+  const [errorMessage] = useState("");
 
   // async function onLogin({ email, password }) {
   //   setLoading(true)
@@ -33,31 +34,33 @@ function LoginPage() {
 
   useEffect(() => {
     if (token) {
-      navigate('/');
+      navigate("/");
     }
   }, [token]);
 
   return (
-    // <>
-    //   {!loadingUser &&
-    <section>
-      <h2>Silakan masuk untuk melanjutkan ...</h2>
-      <LoginInput login={onLogin} loading={loading} />
-      {loading
-        ? <h1>Sedang memuat data ...</h1>
-        : errorMessage && <p>{errorMessage}</p>}
-      <p>
-        Belum punya akun?
-        {' '}
-        <Link to="/register">Daftar di sini.</Link>
-      </p>
-    </section>
-    //   }
-    // </>
+    <>
+      <Header />
+      <main>
+        <section>
+          <div style={{maxWidth:600}}>
+            <h2>Silakan masuk untuk melanjutkan ...</h2>
+            <LoginInput login={onLogin} loading={loading} />
+            {loading ? (
+              <h1>Sedang memuat data ...</h1>
+            ) : (
+              errorMessage && <p>{errorMessage}</p>
+            )}
+            <p>
+              Belum punya akun? <Link to="/register">Daftar di sini.</Link>
+            </p>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }
 
-LoginPage.propTypes = {
-};
+LoginPage.propTypes = {};
 
 export default LoginPage;

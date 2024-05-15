@@ -24,7 +24,7 @@ function threadsReducer(threads = [], action = {}) {
     return action.payload.threadDetail;
   }
   if (action.type === 'THREAD_UPVOTE') {
-    return action.payload.upVote;
+    return action.payload;
   }
 
   return threads;

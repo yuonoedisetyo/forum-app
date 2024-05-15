@@ -126,7 +126,7 @@ const threadVoteUp = async (ThreadId) => {
     return { error: true };
   }
 
-  return { error: false, upVotes: responseJson?.data?.upVotesBy };
+  return { error: false, upVotes: responseJson?.data?.vote };
 };
 const commentVoteUp = async ({ ThreadId, CommentId }) => {
   // const requestBody= JSON.stringify({
@@ -234,7 +234,7 @@ const threadDownVote = async (ThreadId) => {
     return { error: true };
   }
 
-  return { error: false, downVotes: responseJson?.data?.downVotesBy };
+  return { error: false, downVotes: responseJson?.data?.vote };
 };
 const threadNeutralVote = async (ThreadId) => {
   // const requestBody= JSON.stringify({

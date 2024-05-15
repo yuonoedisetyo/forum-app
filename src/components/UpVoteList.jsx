@@ -2,15 +2,15 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import LoadingBar from './common/LoadingBar';
 
-function UpVoteList({ upvotes }) {
+function UpVoteList({ upVotes }) {
   return (
     <div style={{ alignContent: 'center' }}>
       {/* <h3>Up Vote By</h3> */}
       <LoadingBar />
-      {upvotes?.map((upVoteBy) => (
+      {/* {upVotes?.map((upVoteBy) => (
         <label htmlFor="upvoteby">{upVoteBy}</label>
-      ))}
-      <label htmlFor="countUpvotes">{upvotes?.length || 0}</label>
+      ))} */}
+      <label htmlFor="countUpvotes">{upVotes?.length || 0}</label>
     </div>
   );
 }

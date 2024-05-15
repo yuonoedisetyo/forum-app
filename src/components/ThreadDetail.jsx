@@ -7,6 +7,8 @@ import UpVoteList from './UpVoteList';
 function ThreadDetail({
   title, body = '', createdAt, owner, category, totalComments, onUpVote, upVotesBy, onDownVote, downVotesBy, onNeutralVote
 }) {
+  console.log("upVotesBy ",upVotesBy)
+  console.log("downVotesBy ",downVotesBy)
   return (
     <>
       <div className="thread-item">
