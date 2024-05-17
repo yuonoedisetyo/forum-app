@@ -20,7 +20,10 @@ import Header from '../components/common/Header';
 
 function ThreadDetailPage() {
   const threadDetail = useSelector((states) => states.threadDetail);
+  const threads = useSelector((states) => states.threads);
   const dispatch = useDispatch();
+
+  console.log("threads ",threads)
 
   const { ThreadId } = useParams();
 

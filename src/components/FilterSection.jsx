@@ -3,7 +3,7 @@ import React from 'react';
 
 function FilterSection({ categories, onFilter }) {
   return (
-    <div style={{}}>
+    <div>
       <h3>Kategori</h3>
       <div style={{ height: 8 }} />
       <button className="category" onClick={() => onFilter(null)} type="button">Semua Kategori</button>

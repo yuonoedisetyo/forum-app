@@ -33,17 +33,25 @@ async function fetchWithToken(url, options = {}) {
   });
 }
 
-async function getThreads(ThreadId) {
+async function getThreads() {
+  const response = await fetch(`${BASE_URL}/threads`);
+  const responseJson = await response.json();
+
+  if (responseJson.status !== 'success') {
+    return null;
+  }
+  return responseJson?.data?.threads;
+}
+
+async function getThreadsDetail(ThreadId) {
   const response = await fetch(`${BASE_URL}/threads${ThreadId ? `/${ThreadId}` : ''}`);
   const responseJson = await response.json();
 
   if (responseJson.status !== 'success') {
     return null;
   }
-  if (ThreadId) {
-    return responseJson?.data?.detailThread;
-  }
-  return responseJson?.data?.threads;
+  return {threadDetail:responseJson?.data?.detailThread};
+  
 }
 
 const addThread = async ({ title, body, category }) => {
@@ -355,6 +363,7 @@ async function getUsers(UserId) {
 
 export {
   getThreads,
+  getThreadsDetail,
   register,
   login,
   getUsers,

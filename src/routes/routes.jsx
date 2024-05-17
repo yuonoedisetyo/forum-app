@@ -8,6 +8,7 @@ import RegisterPage from '../pages/RegisterPage';
 import Threads from '../pages/Threads';
 import Users from '../pages/Users';
 import ThreadDetailPage from '../pages/ThreadDetail';
+import CreateThread from '../pages/CreateThread';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: 'leaderboards',
     element: <Leaderboards />,
+  },
+  {
+    path: 'createThread',
+    element: <CreateThread />,
   },
 ]);
 

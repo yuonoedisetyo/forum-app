@@ -1,4 +1,5 @@
 function threadsReducer(threads = [], action = {}) {
+  
   if (action.type === 'ADD_THREAD') {
     return [action.payload, ...threads];
   }
@@ -18,13 +19,22 @@ function threadsReducer(threads = [], action = {}) {
   // }
 
   if (action.type === 'RECEIVE_THREADS') {
+    
     return action.payload.threads;
   }
-  if (action.type === 'RECEIVE_THREAD_DETAIL') {
-    return action.payload.threadDetail;
-  }
+ 
   if (action.type === 'THREAD_UPVOTE') {
     return action.payload;
+  }
+
+  return threads;
+}
+function threadDetailReducer(threads = [], action = {}) {
+
+
+  
+  if (action.type === 'RECEIVE_THREAD_DETAIL') {
+    return action.payload.threadDetail;
   }
 
   return threads;
@@ -37,4 +47,4 @@ const commentsReducer = (comments = [], action = {}) => {
   return comments;
 };
 
-export { threadsReducer, commentsReducer };
+export { threadsReducer, commentsReducer ,threadDetailReducer};

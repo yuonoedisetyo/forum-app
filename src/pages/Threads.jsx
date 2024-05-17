@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import Header from '../components/common/Header';
-import FilterSection from '../components/FilterSection';
-import ThreadsList from '../components/ThreadsList';
-import {
-  asyncAddThread,
-  asyncReceiveThreads
-} from '../states/threads/action';
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import Header from "../components/common/Header";
+import FilterSection from "../components/FilterSection";
+import ThreadsList from "../components/ThreadsList";
+import { asyncAddThread, asyncReceiveThreads } from "../states/threads/action";
+import { Link } from "react-router-dom";
 
-function Threads() {
+function Threads({ navigation }) {
   const threads = useSelector((states) => states.threads);
   const dispatch = useDispatch();
 
@@ -16,13 +14,12 @@ function Threads() {
     dispatch(asyncReceiveThreads());
   }, [dispatch]);
 
-  const onAddThread = async (formdata) => {
-    dispatch(asyncAddThread(formdata));
-  };
+  
 
-  const removeDuplicates = (array, property) => {
+  const removeDuplicates = (array=[], property) => {
+    console.log("array ",array)
     const uniqueMap = {};
-    return array.filter((obj) => {
+    return array?.filter((obj) => {
       const value = obj[property];
       if (!uniqueMap[value]) {
         uniqueMap[value] = true;
@@ -32,7 +29,7 @@ function Threads() {
     });
   };
 
-  const [filterValue, setFilterValue] = useState('');
+  const [filterValue, setFilterValue] = useState("");
 
   const onFilterAction = (value) => {
     setFilterValue(value);
@@ -43,13 +40,23 @@ function Threads() {
       <Header />
       <main>
         <FilterSection
-          categories={removeDuplicates(threads, 'category')}
+          categories={removeDuplicates(threads, "category")}
           onFilter={onFilterAction}
         />
+        <div style={{ height: 16 }} />
+
+        <Link to="/createThread">
+          <button style={{ backgroundColor: "#03DAC6",color: "white" }}>Buat Thread</button>
+        </Link>
+
         <div style={{ height: 32 }} />
         {/* <ThreadInput addThread={onAddThread} /> */}
         <ThreadsList
-          threads={filterValue ? threads?.filter((item) => item.category === filterValue) : threads}
+          threads={
+            filterValue
+              ? threads?.filter((item) => item.category === filterValue)
+              : threads
+          }
         />
       </main>
     </>

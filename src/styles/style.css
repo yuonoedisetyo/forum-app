@@ -31,6 +31,10 @@ a {
   cursor: pointer;
 }
 
+.navigation a{
+  color: white;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background-color:var(--on-background);

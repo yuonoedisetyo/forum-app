@@ -1,12 +1,12 @@
 import { accountReducer } from './account/reducer';
 import { leaderBoardsReducer } from './leaderboards/reducers';
 import { loadingReducer } from './loading/reducer';
-import { commentsReducer, threadsReducer } from './threads/reducer';
+import { commentsReducer, threadDetailReducer, threadsReducer } from './threads/reducer';
 
 function rootReducer(state = {}, action = {}) {
   return {
     threads: threadsReducer(state.threads, action),
-    threadDetail: threadsReducer(state.threadDetail, action),
+    threadDetail: threadDetailReducer(state.threadDetail, action),
     account: accountReducer(state.account, action),
     token: accountReducer(state.token, action),
     users: accountReducer(state.users, action),

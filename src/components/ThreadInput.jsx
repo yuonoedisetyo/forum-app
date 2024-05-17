@@ -24,10 +24,13 @@ function ThreadInput({ addThread, loading }) {
   return (
     <form onSubmit={onSubmitHandler}>
       <input type="text" name="title" placeholder="Title" value={title} onChange={onTitleChange} />
+      <div style={{ height: 16 }} />
       <input type="text" name="body" placeholder="Body" value={body} onChange={onBodyChange} />
+      <div style={{ height: 16 }} />
       <input type="text" name="category" placeholder="Category" value={category} onChange={onCategoryChange} />
+      <div style={{ height: 16 }} />
       <LoadingBar />
-      <button type="button" disabled={loading}>{loading ? 'Loading ...' : 'Create Thread'}</button>
+      <button type="submit" disabled={loading}>{loading ? 'Loading ...' : 'Create Thread'}</button>
     </form>
   );
 }
