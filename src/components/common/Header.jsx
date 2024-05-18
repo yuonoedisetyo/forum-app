@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { IconAccount } from '../../assets';
 import { getAccessToken } from '../../data/network-data';
 
 function Header() {
@@ -28,7 +29,7 @@ function Header() {
         </Link>
         {isLogin ? (
           <Link to="/myaccount">
-            <h4>My Account</h4>
+            <img src={IconAccount} alt="icon-account" style={{ height: 32, width: 32 }} />
           </Link>
         )
           : (
