@@ -50,8 +50,7 @@ async function getThreadsDetail(ThreadId) {
   if (responseJson.status !== 'success') {
     return null;
   }
-  return {threadDetail:responseJson?.data?.detailThread};
-  
+  return responseJson?.data?.detailThread;
 }
 
 const addThread = async ({ title, body, category }) => {
@@ -379,4 +378,5 @@ export {
   getLeaderBoards,
   getUsersFromStorage,
   putUsersFromStorage,
+  getAccessToken,
 };

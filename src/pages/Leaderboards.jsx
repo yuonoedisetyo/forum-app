@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Header from '../components/common/Header';
 import LeaderboardList from '../components/LeaderboardList';
 import { asyncReceiveLeaderboards } from '../states/leaderboards/actions';
 
@@ -12,7 +13,12 @@ function Leaderboards() {
   }, [dispatch]);
 
   return (
-    <LeaderboardList leaderboards={leaderboards} />
+    <>
+      <Header />
+      <main>
+        <LeaderboardList leaderboards={leaderboards} />
+      </main>
+    </>
   );
 }
 

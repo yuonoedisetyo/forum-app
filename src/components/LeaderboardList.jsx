@@ -5,17 +5,29 @@ import LoadingBar from './common/LoadingBar';
 function LeaderboardList({ leaderboards }) {
   return (
     <div style={{}}>
-      <h3>Users</h3>
-      {/* <ThreadInput addThread={onAddThread} /> */}
+      <h3>Leaderboards</h3>
       <LoadingBar />
       {leaderboards?.map((leaderboard) => (
         <>
-          <label htmlFor="name">{leaderboard?.user?.name}</label>
-          <label htmlFor="skor">
-            {' '}
-            skor
-            {leaderboard?.score}
-          </label>
+          <div className="thread-item">
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex' }}>
+                <img
+                  alt="avatar"
+                  src={leaderboard?.user?.avatar}
+                  style={{
+                    height: 32, width: 32, alignSelf: 'center', marginRight: 8,
+                  }}
+                />
+                <div>
+                  <label htmlFor="name">{leaderboard?.user?.name}</label>
+                  <br />
+                  <label htmlFor="name">{leaderboard?.user?.email}</label>
+                </div>
+              </div>
+              <label htmlFor="score">{`${leaderboard?.score} skor`}</label>
+            </div>
+          </div>
         </>
       ))}
     </div>

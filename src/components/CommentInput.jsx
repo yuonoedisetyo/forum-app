@@ -1,28 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useInput from '../hooks/useInput';
 import TextArea from './common/TextArea';
 
 function CommentInput({ addComment, loading }) {
-  const [content, onContentChange] = useInput('');
+  const [content, setContent] = useState('');
 
   const onSubmitHandler = (event) => {
-    // // Cegah peramban memuat ulang halaman
-    // event.preventDefault();
+    event.preventDefault();
+    console.log("content ",content)
+    addComment({ content });
+  };
 
-    // // Membaca data form
-    // const form = event.target;
-    // const formData = new FormData(form);
-
-    // // Atau Anda dapat mengerjakannya sebagai objek biasa:
-    // const formJson = Object.fromEntries(formData.entries());
-    // console.log("formJson ",formJson)
-    addComment({content});
+  const onInputHandler = (event) => {
+    console.log("event.target.innerHTML ",event.target.innerHTML)
+    setContent(event.target.innerHTML);
   };
 
   return (
     <form onSubmit={onSubmitHandler}>
-      <TextArea content={content} onInput={onContentChange} placeholder="Tuliskan komentar disini ..." />
+      <TextArea onInput={onInputHandler} placeholder="Tuliskan komentar disini ..." />
       <div style={{ height: 16 }} />
       <div style={{ textAlign: 'right' }}>
         <button type="submit" disabled={loading}>{loading ? 'Loading ...' : 'Create Comment'}</button>

@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function TextArea({ onInput,content, placeholder }) {
+function TextArea({ onInput,placeholder }) {
   return (
     <div
       className="comment-input"
       data-placeholder={placeholder}
       contentEditable
-      onInput={()=>onInput(content)}
+      onInput={onInput}
     />
   );
 }

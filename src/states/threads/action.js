@@ -153,7 +153,7 @@ function asyncReceiveThreadDetail(ThreadId) {
   console.log("asyncReceiveThreadDetail ")
   return async (dispatch) => {
     dispatch(showLoading());
-    const {threadDetail} = await getThreadsDetail(ThreadId);
+    const threadDetail = await getThreadsDetail(ThreadId);
     dispatch(receiveThreadDetailActionCreator(threadDetail));
     dispatch(hideLoading());
   };

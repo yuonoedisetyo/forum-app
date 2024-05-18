@@ -2,7 +2,7 @@ import parse from 'html-react-parser';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getThreads } from '../data/network-data';
+import { getThreads, getThreadsDetail } from '../data/network-data';
 
 function ThreadItem({
   id, title, body, createdAt, totalComments, category,
@@ -19,11 +19,14 @@ function ThreadItem({
     // dispatch(asyncReceiveThreadDetail(id));
 
     async function start() {
-      const threadData = await getThreads(id);
+      const threadData = await getThreadsDetail(id);
+      console.log("threadData ",threadData)
       setThreadDetail(threadData);
     }
     start();
   }, []);
+
+console.log("threadDetail ",threadDetail)
 
   return (
     <Link to={`/thread/${id}`}>
