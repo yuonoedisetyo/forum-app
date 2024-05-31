@@ -11,24 +11,6 @@ function Users() {
     dispatch(asyncReceiveUsers());
   }, [dispatch]);
 
-  // function onAddThread(text) {
-  //   const id = `todo-${+new Date()}`; // generate id using timestamp
-  //   dispatch(
-  //     addThreadActionCreator({
-  //       id,
-  //       text
-  //     })
-  //   );
-  // }
-
-  // function onToggleThread(id) {
-  //   dispatch(toggleThreadActionCreator(id));
-  // }
-
-  // function onDeleteThread(id) {
-  //   dispatch(deleteThreadActionCreator(id));
-  // }
-
   return (
     <UsersList users={users} />
   );

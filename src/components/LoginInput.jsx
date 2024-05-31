@@ -1,11 +1,11 @@
-import PropTypes from "prop-types";
-import React from "react";
-import useInput from "../hooks/useInput";
-import LoadingBar from "./common/LoadingBar";
+import PropTypes from 'prop-types';
+import React from 'react';
+import useInput from '../hooks/useInput';
+import LoadingBar from './common/LoadingBar';
 
 function LoginInput({ login, loading }) {
-  const [email, onEmailChange] = useInput("");
-  const [password, onPasswordChange] = useInput("");
+  const [email, onEmailChange] = useInput('');
+  const [password, onPasswordChange] = useInput('');
 
   const onSubmitHandler = (event) => {
     // Cegah peramban memuat ulang halaman
@@ -40,9 +40,9 @@ function LoginInput({ login, loading }) {
       />
       <div style={{ height: 16 }} />
       <LoadingBar />
-      <div style={{ textAlign: "right" }}>
+      <div style={{ textAlign: 'right' }}>
         <button type="submit" disabled={loading}>
-          {loading ? "Logging in.." : "Masuk"}
+          {loading ? 'Logging in..' : 'Masuk'}
         </button>
       </div>
       <div style={{ height: 16 }} />

@@ -5,7 +5,6 @@ import {
 import { hideLoading, showLoading } from '../loading/action';
 
 function receiveThreadDetailActionCreator(threadDetail) {
-  console.log("receiveThreadDetailActionCreator threadDetail ",threadDetail)
   return {
     type: 'RECEIVE_THREAD_DETAIL',
     payload: {
@@ -150,7 +149,6 @@ function asyncReceiveThreads() {
 }
 
 function asyncReceiveThreadDetail(ThreadId) {
-  console.log("asyncReceiveThreadDetail ")
   return async (dispatch) => {
     dispatch(showLoading());
     const threadDetail = await getThreadsDetail(ThreadId);
@@ -181,7 +179,6 @@ function asyncThreadUpVote(ThreadId) {
   return async (dispatch) => {
     dispatch(showLoading());
     const { upVotes } = await threadVoteUp(ThreadId);
-    console.log("upVotes ",upVotes)
     dispatch(receiveThreadUpVoteActionCreator(upVotes));
     dispatch(hideLoading());
   };

@@ -1,5 +1,5 @@
 import {
-  getUsers, login, myAccount, register,
+  getUsers, getUsersFromStorage, login, myAccount, register,
 } from '../../data/network-data';
 import { hideLoading, showLoading } from '../loading/action';
 
@@ -72,7 +72,7 @@ function asyncLogin(formData) {
 function asyncReceiveUsers(UserId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const result = await getUsers(UserId);
+    const result = getUsersFromStorage() || await getUsers(UserId);
     if (!result?.error) {
       dispatch(userActionCreator(result));
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function TextArea({ onInput,placeholder }) {
+function TextArea({ onInput, placeholder }) {
   return (
     <div
       className="comment-input"
@@ -13,8 +13,8 @@ function TextArea({ onInput,placeholder }) {
 }
 
 TextArea.propTypes = {
-  onInput: PropTypes.func,
-  placeholder: PropTypes.string,
-}
+  onInput: PropTypes.func.isRequired,
+  placeholder: PropTypes.string.isRequired,
+};
 
 export default TextArea;

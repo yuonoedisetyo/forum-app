@@ -1,12 +1,12 @@
-import PropTypes from "prop-types";
-import React from "react";
-import useInput from "../hooks/useInput";
-import LoadingBar from "./common/LoadingBar";
+import PropTypes from 'prop-types';
+import React from 'react';
+import useInput from '../hooks/useInput';
+import LoadingBar from './common/LoadingBar';
 
 function RegisterInput({ register }) {
-  const [name, onNameChange] = useInput("");
-  const [email, onEmailChange] = useInput("");
-  const [password, onPasswordChange] = useInput("");
+  const [name, onNameChange] = useInput('');
+  const [email, onEmailChange] = useInput('');
+  const [password, onPasswordChange] = useInput('');
 
   const handleSubmit = (event) => {
     // Cegah peramban memuat ulang halaman
@@ -47,7 +47,7 @@ function RegisterInput({ register }) {
         />
         <div style={{ height: 16 }} />
         <LoadingBar />
-        <div style={{ textAlign: "right" }}>
+        <div style={{ textAlign: 'right' }}>
           <button type="submit">Simpan</button>
         </div>
       </form>

@@ -1,74 +1,66 @@
-import parse from 'html-react-parser';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getThreads, getThreadsDetail } from '../data/network-data';
+import { showFormattedDate } from '../utils';
+import Gap from './common/Gap';
+import Icon from './common/Icon';
+import Content from './Content';
+import DownVoteList from './DownVoteList';
+import MiniProfile from './MiniProfile';
+import UpVoteList from './UpVoteList';
 
 function ThreadItem({
-  id, title, body, createdAt, totalComments, category,
+  id, title, body, createdAt, totalComments,
+  category, onUpVote, upVotesBy,
+  onDownVote, downVotesBy, type,
+  owner,
+  ownerId,
 }) {
-  // const dataUser = getUsersFromStorage();
-  // console.log("datauser ",dataUser)
-  // const dataUserFiltered = dataUser.filter((item,index)=>{
-  //   return item?.id===ownerId
-  // })
-  // console.log("dataUserFiltered ",dataUserFiltered)
-  const [threadDetail, setThreadDetail] = useState('');
-
-  useEffect(() => {
-    // dispatch(asyncReceiveThreadDetail(id));
-
-    async function start() {
-      const threadData = await getThreadsDetail(id);
-      console.log("threadData ",threadData)
-      setThreadDetail(threadData);
-    }
-    start();
-  }, []);
-
-console.log("threadDetail ",threadDetail)
+  const users = useSelector((states) => states.users);
+  const userData = users.filter((user) => user?.id === ownerId);
 
   return (
-    <Link to={`/thread/${id}`}>
+    <Link to={type === 'detail' ? null : `/thread/${id}`}>
       <div className="thread-item">
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div style={{ alignItems: 'center', flexDirection: 'row', display: 'flex' }}>
-            <img
-              alt="avatar"
-              src={threadDetail?.owner?.avatar}
-              style={{
-                height: 32, width: 32, alignSelf: 'center', marginRight: 8,
-              }}
-            />
-            <label htmlFor="name">{threadDetail?.owner?.name}</label>
-          </div>
+          <MiniProfile
+            avatar={owner?.avatar || userData?.[0]?.avatar}
+            name={owner?.name || userData?.[0]?.name}
+          />
           <label htmlFor="category">{`#${category}`}</label>
         </div>
         <div style={{ height: 16 }} />
-        <div style={{ textAlign: 'left' }}>
-          <label htmlFor="title" style={{ fontWeight: 'bold', lineBreak: 'anywhere' }}>{title}</label>
-          <br />
-          <br />
-          <p style={{
-            WebkitLineClamp: 4,
-            display: '-webkit-box',
-            overflow: 'hidden',
-            WebkitBoxOrient: 'vertical',
-            lineBreak: 'anywhere',
-          }}
-          >
-            {parse(body)}
-          </p>
-          <br />
-          <br />
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <label htmlFor="totalcomment" style={{ fontWeight: 'bold' }}>
-              {totalComments}
-              {' '}
-              komentar
-            </label>
-            <label htmlFor="createat">{createdAt}</label>
+        <Content title={title} body={body} type={type} />
+        <div style={{ display: 'flex', justifyContent: 'space-between', flex: 1 }}>
+          <div style={{ display: 'flex' }}>
+            {type !== 'detail'
+                && (
+                  <>
+                    <label htmlFor="totalcomment" style={{ fontWeight: 'bold' }}>
+                      {totalComments}
+                      {' '}
+                      komentar
+                    </label>
+                    <Gap width={16} />
+                  </>
+                )}
+            <div onClick={() => onUpVote(id)}>
+              <Icon icon="like" />
+            </div>
+            <div style={{ width: 6 }} />
+            <UpVoteList upVotes={upVotesBy} />
+            <div style={{ width: 10 }} />
+            <div onClick={() => onDownVote(id)}>
+              <Icon icon="unlike" />
+            </div>
+            <div style={{ width: 6 }} />
+            <DownVoteList downVotes={downVotesBy} />
+            {/* <button onClick={() => commentNeutralVote(id)}>Comment Neutral Vote</button> */}
           </div>
+          <label htmlFor="createat">{showFormattedDate(createdAt)}</label>
         </div>
       </div>
     </Link>
@@ -76,12 +68,22 @@ console.log("threadDetail ",threadDetail)
 }
 
 ThreadItem.propTypes = {
+  type: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  ownerId: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
   totalComments: PropTypes.number.isRequired,
+  owner: PropTypes.shape({
+    avatar: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  onUpVote: PropTypes.func.isRequired,
+  upVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  downVotesBy: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onDownVote: PropTypes.func.isRequired,
 };
 
 export default ThreadItem;

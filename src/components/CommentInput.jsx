@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import useInput from '../hooks/useInput';
+import React, { useState } from 'react';
 import TextArea from './common/TextArea';
 
 function CommentInput({ addComment, loading }) {
@@ -8,12 +7,10 @@ function CommentInput({ addComment, loading }) {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    console.log("content ",content)
     addComment({ content });
   };
 
   const onInputHandler = (event) => {
-    console.log("event.target.innerHTML ",event.target.innerHTML)
     setContent(event.target.innerHTML);
   };
 

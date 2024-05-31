@@ -16,7 +16,7 @@ function UpVoteList({ upVotes }) {
 }
 
 UpVoteList.propTypes = {
-  upvotes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  upVotes: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default UpVoteList;
