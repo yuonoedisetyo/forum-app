@@ -16,7 +16,8 @@ function Leaderboards() {
     <>
       <Header />
       <main>
-        <LeaderboardList leaderboards={leaderboards} />
+        {leaderboards
+          && <LeaderboardList leaderboards={leaderboards} />}
       </main>
     </>
   );

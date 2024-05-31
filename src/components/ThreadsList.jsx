@@ -11,6 +11,7 @@ function ThreadsList({ threads, onUpVote, onDownVote }) {
       <LoadingBar />
       {threads?.map((thread) => (
         <ThreadItem
+          key={thread?.id}
           onUpVote={onUpVote}
           onDownVote={onDownVote}
           {...thread}

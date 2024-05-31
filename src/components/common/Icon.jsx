@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IconLike, IconUnLike } from '../../assets';
 
-function Icon({ width, height, icon }) {
+function Icon({ icon }) {
   if (icon === 'like') {
     return (
       <IconLike />
@@ -19,8 +19,6 @@ function Icon({ width, height, icon }) {
 }
 
 Icon.propTypes = {
-  height: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
   icon: PropTypes.string.isRequired,
 };
 

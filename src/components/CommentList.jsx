@@ -12,6 +12,7 @@ function CommentsList({
       <LoadingBar />
       {comments?.map((comment) => (
         <CommentItem
+          key={comment?.id}
           {...comment}
           commentUpVote={commentUpVote}
           commentDownVote={commentDownVote}

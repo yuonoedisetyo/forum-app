@@ -9,7 +9,7 @@ function FilterSection({ categories, onFilter }) {
       <div style={{ height: 8 }} />
       <Button className="category" secondary label="Semua Kategori" onPress={() => onFilter(null)} />
       {categories?.map((item) => (
-        <Button className="category" secondary label={item?.category} onPress={() => onFilter(item?.category)} />
+        <Button key={item.category} className="category" secondary label={item?.category} onPress={() => onFilter(item?.category)} />
       ))}
     </div>
   );

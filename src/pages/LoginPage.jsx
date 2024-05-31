@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import Header from '../components/common/Header';
 import LoginInput from '../components/LoginInput';
 import { asyncLogin } from '../states/account/action';
-import Header from '../components/common/Header';
 
 function LoginPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = useSelector((states) => states.token);
+  // const token = getAccessToken();
 
   const [loading] = useState(false);
   const [errorMessage] = useState('');
@@ -18,6 +19,7 @@ function LoginPage() {
   };
 
   useEffect(() => {
+    // alert(token);
     if (token) {
       navigate('/');
     }

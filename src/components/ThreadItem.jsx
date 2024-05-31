@@ -20,7 +20,9 @@ function ThreadItem({
   ownerId,
 }) {
   const users = useSelector((states) => states.users);
-  const userData = users.filter((user) => user?.id === ownerId);
+  const userData = ownerId
+    ? (users.length > 0 && users?.filter((user) => user?.id === ownerId))
+    : null;
 
   return (
     <Link to={type === 'detail' ? null : `/thread/${id}`}>

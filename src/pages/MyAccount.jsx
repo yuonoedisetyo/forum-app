@@ -1,18 +1,35 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import Button from '../components/common/Button';
+import Gap from '../components/common/Gap';
 import Header from '../components/common/Header';
-import { asyncReceiveMyAccount } from '../states/account/action';
+import { putAccessToken } from '../data/network-data';
+import { asyncReceiveMyAccount, loginActionCreator } from '../states/account/action';
 
 function MyAccount() {
   const myAccount = useSelector((states) => states.myAccount);
+  const token = useSelector((states) => states.token);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(asyncReceiveMyAccount());
+    if (token) {
+      dispatch(asyncReceiveMyAccount());
+    }
   }, [dispatch]);
 
   useEffect(() => {
-  }, [myAccount]);
+    if (!token) {
+      navigate('/login');
+    }
+  }, [token]);
+
+  const onLogout = () => {
+    dispatch(loginActionCreator({ token: null }));
+    putAccessToken(null);
+  };
 
   return (
     <>
@@ -32,14 +49,18 @@ function MyAccount() {
             />
             <div style={{ marginTop: 16, alignSelf: 'center' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <text>Nama</text>
+                <label htmlFor="namaLabel">Nama</label>
                 <label htmlFor="name">{myAccount?.name}</label>
               </div>
               <div style={{ height: 16 }} />
               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <text>Email</text>
-                <label htmlFor="name">{myAccount?.email}</label>
+                <label htmlFor="emailLabel">Email</label>
+                <label htmlFor="email">{myAccount?.email}</label>
               </div>
+            </div>
+            <Gap height={16} />
+            <div style={{ textAlign: 'left' }}>
+              <Button label="Logout " onPress={onLogout} />
             </div>
           </div>
         </div>

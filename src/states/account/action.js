@@ -99,4 +99,5 @@ export {
   asyncReceiveUsers,
   asyncReceiveMyAccount,
   myAccountActionCreator,
+  loginActionCreator,
 };

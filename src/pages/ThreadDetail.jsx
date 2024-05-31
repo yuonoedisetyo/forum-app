@@ -61,39 +61,35 @@ function ThreadDetailPage() {
     <>
       <Header />
       <main>
-        {/* <ThreadDetail
-          title={threadDetail?.title}
-          body={threadDetail?.body}
-          onUpVote={onUpVote}
-          onDownVote={onDownVote}
-          upVotesBy={threadDetail?.upVotesBy}
-          downVotesBy={threadDetail?.downVotesBy}
-          onNeutralVote={onNeutralVote}
-          {...threadDetail}
-        /> */}
-        <ThreadItem
-          type="detail"
-          id={threadDetail?.id}
-          title={threadDetail?.title}
-          body={threadDetail?.body}
-          onUpVote={onUpVote}
-          onDownVote={onDownVote}
-          upVotesBy={threadDetail?.upVotesBy}
-          downVotesBy={threadDetail?.downVotesBy}
-          onNeutralVote={onNeutralVote}
-          {...threadDetail}
-        />
+        {threadDetail?.id
+          && (
+            <ThreadItem
+              type="detail"
+              // id={threadDetail?.id}
+              // title={threadDetail?.title}
+              // body={threadDetail?.body}
+              onUpVote={onUpVote}
+              onDownVote={onDownVote}
+              // upVotesBy={threadDetail?.upVotesBy}
+              // downVotesBy={threadDetail?.downVotesBy}
+              onNeutralVote={onNeutralVote}
+              {...threadDetail}
+            />
+          )}
         <div style={{ height: 16 }} />
-        <CommentsList
-          comments={threadDetail?.comments?.sort((b, a) => {
-            if (a.createdAt < b.createdAt) return 1;
-            if (a.createdAt > b.createdAt) return -1;
-            return 0;
-          })}
-          commentUpVote={onCommentUpVote}
-          commentDownVote={onCommentDownVote}
-          commentNeutralVote={onCommentNeutralVote}
-        />
+        {threadDetail?.comments
+          && (
+          <CommentsList
+            comments={threadDetail?.comments?.sort((b, a) => {
+              if (a.createdAt < b.createdAt) return 1;
+              if (a.createdAt > b.createdAt) return -1;
+              return 0;
+            })}
+            commentUpVote={onCommentUpVote}
+            commentDownVote={onCommentDownVote}
+            commentNeutralVote={onCommentNeutralVote}
+          />
+          )}
         <div style={{ height: 16 }} />
         <CommentInput addComment={onAddComment} />
 

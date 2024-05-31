@@ -379,4 +379,5 @@ export {
   getUsersFromStorage,
   putUsersFromStorage,
   getAccessToken,
+  putAccessToken,
 };
