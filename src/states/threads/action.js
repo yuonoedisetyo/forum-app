@@ -1,8 +1,6 @@
-import {
-  addComment, addThread, commentDownVote, commentNeutralVote,
-  commentVoteUp, getThreads, getThreadsDetail, threadDownVote, threadNeutralVote, threadVoteUp,
-} from '../../data/network-data';
-import { hideLoading, showLoading } from '../loading/action';
+import { hideLoading, showLoading } from 'react-redux-loading-bar';
+import API from '../../data/network-data';
+// import { hideLoading, showLoading } from '../loading/action';
 
 function receiveThreadDetailActionCreator(threadDetail) {
   return {
@@ -140,9 +138,13 @@ function asyncReceiveThreads() {
   return async (dispatch) => {
     // dispatch(showLoading());
     dispatch(showLoading());
+    try {
     // const threads = await mockAPI.getTodos();
-    const threads = await getThreads();
-    dispatch(receiveThreadsActionCreator(threads));
+      const threads = await API.getThreads();
+      dispatch(receiveThreadsActionCreator(threads));
+    } catch (error) {
+      alert('Ups, something went wrong');
+    }
     // dispatch(hideLoading());
     dispatch(hideLoading());
   };
@@ -151,8 +153,12 @@ function asyncReceiveThreads() {
 function asyncReceiveThreadDetail(ThreadId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const threadDetail = await getThreadsDetail(ThreadId);
-    dispatch(receiveThreadDetailActionCreator(threadDetail));
+    try {
+      const threadDetail = await API.getThreadsDetail(ThreadId);
+      dispatch(receiveThreadDetailActionCreator(threadDetail));
+    } catch (error) {
+      alert('Ups, something went wrong');
+    }
     dispatch(hideLoading());
   };
 }
@@ -160,7 +166,7 @@ function asyncReceiveThreadDetail(ThreadId) {
 function asyncAddThread(formData) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { thread } = await addThread(formData);
+    const { thread } = await API.addThread(formData);
     dispatch(receiveAddThreadActionCreator(thread));
     dispatch(hideLoading());
   };
@@ -169,8 +175,12 @@ function asyncAddThread(formData) {
 function asyncAddComment(formData) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { comment } = await addComment(formData);
-    dispatch(receiveAddCommentActionCreator(comment));
+    try {
+      const { comment } = await API.addComment(formData);
+      dispatch(receiveAddCommentActionCreator(comment));
+    } catch (error) {
+      alert(error.message);
+    }
     dispatch(hideLoading());
   };
 }
@@ -178,7 +188,7 @@ function asyncAddComment(formData) {
 function asyncThreadUpVote(ThreadId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { upVotes } = await threadVoteUp(ThreadId);
+    const { upVotes } = await API.threadVoteUp(ThreadId);
     dispatch(receiveThreadUpVoteActionCreator(upVotes));
     dispatch(hideLoading());
   };
@@ -186,7 +196,7 @@ function asyncThreadUpVote(ThreadId) {
 function asyncCommentUpVote({ ThreadId, CommentId }) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { upVotes } = await commentVoteUp({ ThreadId, CommentId });
+    const { upVotes } = await API.commentVoteUp({ ThreadId, CommentId });
     dispatch(receiveCommentUpVoteActionCreator(upVotes));
     dispatch(hideLoading());
   };
@@ -194,7 +204,7 @@ function asyncCommentUpVote({ ThreadId, CommentId }) {
 function asyncCommentDownVote({ ThreadId, CommentId }) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { downVotes } = await commentDownVote({ ThreadId, CommentId });
+    const { downVotes } = await API.commentDownVote({ ThreadId, CommentId });
     dispatch(receiveCommentDownVoteActionCreator(downVotes));
     dispatch(hideLoading());
   };
@@ -202,7 +212,7 @@ function asyncCommentDownVote({ ThreadId, CommentId }) {
 function asyncCommentNeutralVote({ ThreadId, CommentId }) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { neutralVotes } = await commentNeutralVote({ ThreadId, CommentId });
+    const { neutralVotes } = await API.commentNeutralVote({ ThreadId, CommentId });
     dispatch(receiveCommentNeutralVoteActionCreator(neutralVotes));
     dispatch(hideLoading());
   };
@@ -210,7 +220,7 @@ function asyncCommentNeutralVote({ ThreadId, CommentId }) {
 function asyncThreadDownVote(ThreadId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { downVotes } = await threadDownVote(ThreadId);
+    const { downVotes } = await API.threadDownVote(ThreadId);
     dispatch(receiveThreadDownVoteActionCreator(downVotes));
     dispatch(hideLoading());
   };
@@ -218,7 +228,7 @@ function asyncThreadDownVote(ThreadId) {
 function asyncThreadNeutralVote(ThreadId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const { vote } = await threadNeutralVote(ThreadId);
+    const { vote } = await API.threadNeutralVote(ThreadId);
     dispatch(receiveThreadNeutralVoteActionCreator(vote));
     dispatch(hideLoading());
   };
@@ -238,4 +248,5 @@ export {
   asyncCommentUpVote,
   asyncCommentDownVote,
   asyncCommentNeutralVote,
+  receiveThreadDetailActionCreator,
 };

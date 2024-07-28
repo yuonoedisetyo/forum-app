@@ -18,7 +18,6 @@ import {
 
 function ThreadDetailPage() {
   const threadDetail = useSelector((states) => states.threadDetail);
-  // const comments = useSelector((states) => states.comments);
   const dispatch = useDispatch();
 
   const { ThreadId } = useParams();

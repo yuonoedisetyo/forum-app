@@ -1,7 +1,7 @@
 import { accountReducer, tokenReducer } from './account/reducer';
 import { leaderBoardsReducer } from './leaderboards/reducers';
 import { loadingReducer } from './loading/reducer';
-import { commentsReducer, threadDetailReducer, threadsReducer } from './threads/reducer';
+import { threadDetailReducer, threadsReducer } from './threads/reducer';
 
 function rootReducer(state = {}, action = {}) {
   return {
@@ -11,7 +11,6 @@ function rootReducer(state = {}, action = {}) {
     token: tokenReducer(state.token, action),
     users: accountReducer(state.users, action),
     myAccount: accountReducer(state.myAccount, action),
-    comments: commentsReducer(state.comments, action),
     leaderboards: leaderBoardsReducer(state.leaderboards, action),
     // loadingBar: loadingBarReducer,
     loading: loadingReducer(state.loading, action),

@@ -39,9 +39,9 @@ function LoginInput({ login, loading }) {
         onChange={onPasswordChange}
       />
       <div style={{ height: 16 }} />
-      <LoadingBar />
+      {/* <LoadingBar /> */}
       <div style={{ textAlign: 'right' }}>
-        <button type="submit" disabled={loading}>
+        <button type="submit" name="Masuk" disabled={loading}>
           {loading ? 'Logging in..' : 'Masuk'}
         </button>
       </div>

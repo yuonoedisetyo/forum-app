@@ -33,351 +33,367 @@ async function fetchWithToken(url, options = {}) {
   });
 }
 
-async function getThreads() {
-  const response = await fetch(`${BASE_URL}/threads`);
-  const responseJson = await response.json();
+const API = (() => {
+  async function getThreads() {
+    const response = await fetch(`${BASE_URL}/threads`);
+    const responseJson = await response.json();
 
-  if (responseJson.status !== 'success') {
-    return null;
-  }
-  return responseJson?.data?.threads;
-}
+    const { status, message } = responseJson;
 
-async function getThreadsDetail(ThreadId) {
-  const response = await fetch(`${BASE_URL}/threads${ThreadId ? `/${ThreadId}` : ''}`);
-  const responseJson = await response.json();
+    if (status !== 'success') {
+      throw new Error('Ups, something went wrong');
+    }
 
-  if (responseJson.status !== 'success') {
-    return null;
-  }
-  return responseJson?.data?.detailThread;
-}
-
-const addThread = async ({ title, body, category }) => {
-  const requestBody = JSON.stringify({
-    title,
-    body,
-    category,
-  });
-  const token = getAccessToken();
-  if (!token) {
-    window.location.href = '/login';
-    return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
-  }
-  const response = await fetch(`${BASE_URL}/threads`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: requestBody,
-  });
-  const responseJson = await response.json();
-
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
+    if (responseJson.status !== 'success') {
+      return null;
+    }
+    return responseJson?.data?.threads;
   }
 
-  return { error: false, thread: responseJson?.data?.thread };
-};
+  async function getThreadsDetail(ThreadId) {
+    const response = await fetch(`${BASE_URL}/threads${ThreadId ? `/${ThreadId}` : ''}`);
+    const responseJson = await response.json();
 
-const addComment = async ({ content, ThreadId }) => {
-  const requestBody = JSON.stringify({
-    content,
-  });
-  const token = getAccessToken();
-  if (!token) {
-    window.location.href = '/login';
-    return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
-  }
-  const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-    body: requestBody,
-  });
-  const responseJson = await response.json();
+    const { status, message } = responseJson;
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
+    if (status !== 'success') {
+      throw new Error('Ups, something went wrong');
+    }
+
+    if (responseJson.status !== 'success') {
+      return null;
+    }
+    return responseJson?.data?.detailThread;
   }
 
-  return { error: false, comment: responseJson?.data?.comment };
-};
+  const addThread = async ({ title, body, category }) => {
+    const requestBody = JSON.stringify({
+      title,
+      body,
+      category,
+    });
+    const token = getAccessToken();
+    if (!token) {
+      window.location.href = '/login';
+      return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
+    }
+    const response = await fetch(`${BASE_URL}/threads`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: requestBody,
+    });
+    const responseJson = await response.json();
 
-const threadVoteUp = async (ThreadId) => {
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
+
+    return { error: false, thread: responseJson?.data?.thread };
+  };
+
+  const addComment = async ({ content, ThreadId }) => {
+    const requestBody = JSON.stringify({
+      content,
+    });
+    const token = getAccessToken();
+    if (!token) {
+      window.location.href = '/login';
+      return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
+    }
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: requestBody,
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
+
+    return { error: false, comment: responseJson?.data?.comment };
+  };
+
+  const threadVoteUp = async (ThreadId) => {
   // const requestBody= JSON.stringify({
   //   content
   // })
-  const token = getAccessToken();
-  if (!token) {
-    window.location.href = '/login';
-    return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
-  }
-  const response = await fetch(`${BASE_URL}/threads/${ThreadId}/up-vote`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+    const token = getAccessToken();
+    if (!token) {
+      window.location.href = '/login';
+      return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
+    }
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/up-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     // body: requestBody,
-  });
-  const responseJson = await response.json();
+    });
+    const responseJson = await response.json();
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
-  }
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
 
-  return { error: false, upVotes: responseJson?.data?.vote };
-};
-const commentVoteUp = async ({ ThreadId, CommentId }) => {
+    return { error: false, upVotes: responseJson?.data?.vote };
+  };
+  const commentVoteUp = async ({ ThreadId, CommentId }) => {
   // const requestBody= JSON.stringify({
   //   content
   // })
-  const token = getAccessToken();
-  if (!token) {
-    window.location.href = '/login';
-    return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
-  }
-  const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/up-vote`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+    const token = getAccessToken();
+    if (!token) {
+      window.location.href = '/login';
+      return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
+    }
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/up-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     // body: requestBody,
-  });
-  const responseJson = await response.json();
+    });
+    const responseJson = await response.json();
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
-  }
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
 
-  return { error: false, upVotes: responseJson?.data?.vote };
-};
-const commentDownVote = async ({ ThreadId, CommentId }) => {
+    return { error: false, upVotes: responseJson?.data?.vote };
+  };
+  const commentDownVote = async ({ ThreadId, CommentId }) => {
   // const requestBody= JSON.stringify({
   //   content
   // })
-  const token = getAccessToken();
-  if (!token) {
-    window.location.href = '/login';
-    return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
-  }
-  const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/down-vote`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+    const token = getAccessToken();
+    if (!token) {
+      window.location.href = '/login';
+      return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
+    }
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/down-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     // body: requestBody,
-  });
-  const responseJson = await response.json();
+    });
+    const responseJson = await response.json();
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
-  }
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
 
-  return { error: false, downVotes: responseJson?.data?.vote };
-};
-const commentNeutralVote = async ({ ThreadId, CommentId }) => {
+    return { error: false, downVotes: responseJson?.data?.vote };
+  };
+  const commentNeutralVote = async ({ ThreadId, CommentId }) => {
   // const requestBody= JSON.stringify({
   //   content
   // })
-  const token = getAccessToken();
-  if (!token) {
-    window.location.href = '/login';
-    return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
-  }
-  const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/neutral-vote`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+    const token = getAccessToken();
+    if (!token) {
+      window.location.href = '/login';
+      return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
+    }
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/comments/${CommentId}/neutral-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     // body: requestBody,
-  });
-  const responseJson = await response.json();
+    });
+    const responseJson = await response.json();
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
-  }
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
 
-  return { error: false, neutralVotes: responseJson?.data?.vote };
-};
+    return { error: false, neutralVotes: responseJson?.data?.vote };
+  };
 
-// const navigation = useNavigation()
+  // const navigation = useNavigation()
 
-const threadDownVote = async (ThreadId) => {
+  const threadDownVote = async (ThreadId) => {
   // const requestBody= JSON.stringify({
   //   content
   // })
-  const token = getAccessToken();
-  if (!token) {
+    const token = getAccessToken();
+    if (!token) {
     // navigation.navigate("/")
-    window.location.href = '/login';
-    return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
-  }
-  const response = await fetch(`${BASE_URL}/threads/${ThreadId}/down-vote`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+      window.location.href = '/login';
+      return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
+    }
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/down-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     // body: requestBody,
-  });
-  const responseJson = await response.json();
+    });
+    const responseJson = await response.json();
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
-  }
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
 
-  return { error: false, downVotes: responseJson?.data?.vote };
-};
-const threadNeutralVote = async (ThreadId) => {
+    return { error: false, downVotes: responseJson?.data?.vote };
+  };
+  const threadNeutralVote = async (ThreadId) => {
   // const requestBody= JSON.stringify({
   //   content
   // })
-  const token = getAccessToken();
-  if (!token) {
-    window.location.href = '/login';
-    return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
-  }
-  const response = await fetch(`${BASE_URL}/threads/${ThreadId}/neutral-vote`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
+    const token = getAccessToken();
+    if (!token) {
+      window.location.href = '/login';
+      return { error: true, errorCode: '2', errorMessage: 'Harus Login terlebih dahulu' };
+    }
+    const response = await fetch(`${BASE_URL}/threads/${ThreadId}/neutral-vote`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
     // body: requestBody,
-  });
-  const responseJson = await response.json();
+    });
+    const responseJson = await response.json();
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
+
+    return { error: false, neutralVotes: responseJson?.data?.neutralVotesBy };
+  };
+
+  async function register({ name, email, password }) {
+    const requestBody = JSON.stringify({
+      name,
+      email,
+      password,
+    });
+
+    const response = await fetch(`${BASE_URL}/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: requestBody,
+    });
+    const responseJson = await response.json();
+
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
+
+    return { error: false, account: responseJson?.data?.user };
   }
 
-  return { error: false, neutralVotes: responseJson?.data?.neutralVotesBy };
-};
+  async function login({ email, password }) {
+    const requestBody = JSON.stringify({
+      email,
+      password,
+    });
 
-async function register({ name, email, password }) {
-  const requestBody = JSON.stringify({
-    name,
-    email,
-    password,
-  });
+    const response = await fetch(`${BASE_URL}/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: requestBody,
+    });
+    const responseJson = await response.json();
 
-  const response = await fetch(`${BASE_URL}/register`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: requestBody,
-  });
-  const responseJson = await response.json();
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
+    putAccessToken(responseJson?.data?.token);
+
+    return { error: false, token: responseJson?.data?.token };
   }
 
-  return { error: false, account: responseJson?.data?.user };
-}
+  async function myAccount() {
+    const response = await fetchWithToken(`${BASE_URL}/users/me`);
+    if (response?.errorCode === '2') {
+      return response;
+    }
+    const responseJson = await response.json();
 
-async function login({ email, password }) {
-  const requestBody = JSON.stringify({
-    email,
-    password,
-  });
+    if (responseJson.status !== 'success') {
+      alert(responseJson.message);
+      return { error: true };
+    }
 
-  const response = await fetch(`${BASE_URL}/login`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: requestBody,
-  });
-  const responseJson = await response.json();
-
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
+    return { error: false, myAccount: responseJson?.data?.user };
   }
 
-  putAccessToken(responseJson?.data?.token);
+  async function getLeaderBoards() {
+    const response = await fetch(`${BASE_URL}/leaderboards`);
+    const responseJson = await response.json();
 
-  return { error: false, token: responseJson?.data?.token };
-}
-
-async function myAccount() {
-  const response = await fetchWithToken(`${BASE_URL}/users/me`);
-  if (response?.errorCode === '2') {
-    return response;
+    if (responseJson.status !== 'success') {
+      return null;
+    }
+    // if(UserId){
+    //   return responseJson?.data?.detailThread
+    // }
+    return responseJson?.data?.leaderboards;
   }
-  const responseJson = await response.json();
+  async function getUsers(UserId) {
+    const response = await fetch(`${BASE_URL}/users${UserId ? `/${UserId}` : ''}`);
+    const responseJson = await response.json();
 
-  if (responseJson.status !== 'success') {
-    alert(responseJson.message);
-    return { error: true };
+    if (responseJson.status !== 'success') {
+      return null;
+    }
+    // if(UserId){
+    //   return responseJson?.data?.detailThread
+    // }
+    putUsersFromStorage(responseJson?.data?.users);
+    return responseJson?.data?.users;
   }
 
-  return { error: false, myAccount: responseJson?.data?.user };
-}
+  return {
+    getThreads,
+    getThreadsDetail,
+    register,
+    login,
+    getUsers,
+    myAccount,
+    addThread,
+    addComment,
+    threadVoteUp,
+    threadDownVote,
+    threadNeutralVote,
+    commentVoteUp,
+    commentDownVote,
+    commentNeutralVote,
+    getLeaderBoards,
+    getUsersFromStorage,
+    putUsersFromStorage,
+    getAccessToken,
+    putAccessToken,
+  };
+})();
 
-async function getLeaderBoards() {
-  const response = await fetch(`${BASE_URL}/leaderboards`);
-  const responseJson = await response.json();
-
-  if (responseJson.status !== 'success') {
-    return null;
-  }
-  // if(UserId){
-  //   return responseJson?.data?.detailThread
-  // }
-  return responseJson?.data?.leaderboards;
-}
-async function getUsers(UserId) {
-  const response = await fetch(`${BASE_URL}/users${UserId ? `/${UserId}` : ''}`);
-  const responseJson = await response.json();
-
-  if (responseJson.status !== 'success') {
-    return null;
-  }
-  // if(UserId){
-  //   return responseJson?.data?.detailThread
-  // }
-  putUsersFromStorage(responseJson?.data?.users);
-  return responseJson?.data?.users;
-}
-
-export {
-  getThreads,
-  getThreadsDetail,
-  register,
-  login,
-  getUsers,
-  myAccount,
-  addThread,
-  addComment,
-  threadVoteUp,
-  threadDownVote,
-  threadNeutralVote,
-  commentVoteUp,
-  commentDownVote,
-  commentNeutralVote,
-  getLeaderBoards,
-  getUsersFromStorage,
-  putUsersFromStorage,
-  getAccessToken,
-  putAccessToken,
-};
+export default API;
