@@ -99,7 +99,7 @@ describe('asyncReceiveThreads thunk', () => {
   it('should dispatch action correctly when data fetching success', async () => {
     // arrange
     // stub implementation
-    API._getThreads = () => Promise.resolve(fakeThreadsResponse);
+    API.getThreads = () => Promise.resolve(fakeThreadsResponse);
     // mock dispatch
     const dispatch = vi.fn();
 
@@ -115,7 +115,7 @@ describe('asyncReceiveThreads thunk', () => {
   it('should dispatch action and call alert correctly when data fetching failed', async () => {
     // arrange
     // stub implementation
-    API._getThreads = () => Promise.reject(fakeErrorResponse);
+    API.getThreads = () => Promise.reject(fakeErrorResponse);
     // mock dispatch
     const dispatch = vi.fn();
     // mock alert
@@ -127,20 +127,20 @@ describe('asyncReceiveThreads thunk', () => {
     // assert
     expect(dispatch).toHaveBeenCalledWith(showLoading());
     expect(dispatch).toHaveBeenCalledWith(hideLoading());
-    // expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
+    expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
   });
 });
 
 describe('asyncReceiveThreadDetail thunk', () => {
   beforeEach(() => {
-    API._getThreadDetail = API.getThreadsDetail;
+    API._getThreadsDetail = API.getThreadsDetail;
   });
 
   afterEach(() => {
-    API._getThreadDetail = API.getThreadsDetail;
+    API._getThreadsDetail = API.getThreadsDetail;
 
     // delete backup data
-    delete API._getThreadDetail;
+    delete API._getThreadsDetail;
   });
 
   // ... backup and restore
@@ -148,7 +148,7 @@ describe('asyncReceiveThreadDetail thunk', () => {
   it('should dispatch action correctly when data fetching success', async () => {
     // arrange
     // stub implementation
-    API._getThreadDetail = () => Promise.resolve(fakeThreadDetailResponse);
+    API.getThreadsDetail = () => Promise.resolve(fakeThreadDetailResponse);
     // mock dispatch
     const dispatch = vi.fn();
 
@@ -166,7 +166,7 @@ describe('asyncReceiveThreadDetail thunk', () => {
   it('should dispatch action and call alert correctly when data fetching failed', async () => {
     // arrange
     // stub implementation
-    API._getThreads = () => Promise.reject(fakeErrorResponse);
+    API.getThreadsDetail = () => Promise.reject(fakeErrorResponse);
     // mock dispatch
     const dispatch = vi.fn();
     // mock alert
@@ -178,7 +178,7 @@ describe('asyncReceiveThreadDetail thunk', () => {
     // assert
     expect(dispatch).toHaveBeenCalledWith(showLoading());
     expect(dispatch).toHaveBeenCalledWith(hideLoading());
-    // expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
+    expect(window.alert).toHaveBeenCalledWith(fakeErrorResponse.message);
   });
 });
 

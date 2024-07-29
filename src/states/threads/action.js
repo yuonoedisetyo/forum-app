@@ -142,13 +142,32 @@ function asyncReceiveThreads() {
     // const threads = await mockAPI.getTodos();
       const threads = await API.getThreads();
       dispatch(receiveThreadsActionCreator(threads));
+      // alert('Ups2');
     } catch (error) {
-      alert('Ups, something went wrong');
+      alert(error.message);
     }
     // dispatch(hideLoading());
     dispatch(hideLoading());
   };
 }
+
+// function asyncPopulateUsersAndTalks() {
+//   return async (dispatch) => {
+//     dispatch(showLoading());
+
+//     try {
+//       const users = await api.getAllUsers();
+//       const talks = await api.getAllTalks();
+
+//       dispatch(receiveUsersActionCreator(users));
+//       dispatch(receiveTalksActionCreator(talks));
+//     } catch (error) {
+//       alert(error.message);
+//     }
+
+//     dispatch(hideLoading());
+//   };
+// }
 
 function asyncReceiveThreadDetail(ThreadId) {
   return async (dispatch) => {
@@ -157,7 +176,7 @@ function asyncReceiveThreadDetail(ThreadId) {
       const threadDetail = await API.getThreadsDetail(ThreadId);
       dispatch(receiveThreadDetailActionCreator(threadDetail));
     } catch (error) {
-      alert('Ups, something went wrong');
+      alert(error.message);
     }
     dispatch(hideLoading());
   };

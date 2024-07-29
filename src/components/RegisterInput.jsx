@@ -46,9 +46,9 @@ function RegisterInput({ register }) {
           onChange={onPasswordChange}
         />
         <div style={{ height: 16 }} />
-        <LoadingBar />
+        {/* <LoadingBar /> */}
         <div style={{ textAlign: 'right' }}>
-          <button type="submit">Simpan</button>
+          <button type="submit" name="Simpan">Simpan</button>
         </div>
       </form>
     </div>

@@ -41,7 +41,8 @@ const API = (() => {
     const { status, message } = responseJson;
 
     if (status !== 'success') {
-      throw new Error('Ups, something went wrong');
+      // window.alert('Ups, something went wrong');
+      throw new Error(message);
     }
 
     if (responseJson.status !== 'success') {
@@ -50,6 +51,22 @@ const API = (() => {
     return responseJson?.data?.threads;
   }
 
+  // async function getAllUsers() {
+  //   const response = await fetch(`${BASE_URL}/users`);
+
+  //   const responseJson = await response.json();
+
+  //   const { status, message } = responseJson;
+
+  //   if (status !== 'success') {
+  //     throw new Error(message);
+  //   }
+
+  //   const { data: { users } } = responseJson;
+
+  //   return users;
+  // }
+
   async function getThreadsDetail(ThreadId) {
     const response = await fetch(`${BASE_URL}/threads${ThreadId ? `/${ThreadId}` : ''}`);
     const responseJson = await response.json();
@@ -57,7 +74,7 @@ const API = (() => {
     const { status, message } = responseJson;
 
     if (status !== 'success') {
-      throw new Error('Ups, something went wrong');
+      throw new Error(message);
     }
 
     if (responseJson.status !== 'success') {
