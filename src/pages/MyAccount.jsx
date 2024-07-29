@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/common/Button';
 import Gap from '../components/common/Gap';
 import Header from '../components/common/Header';
-import { putAccessToken } from '../data/network-data';
+import API from '../data/network-data';
 import { asyncReceiveMyAccount, loginActionCreator } from '../states/account/action';
 
 function MyAccount() {
@@ -28,7 +28,7 @@ function MyAccount() {
 
   const onLogout = () => {
     dispatch(loginActionCreator({ token: null }));
-    putAccessToken(null);
+    API.putAccessToken(null);
   };
 
   return (

@@ -1,6 +1,4 @@
-import {
-  getUsers, getUsersFromStorage, login, myAccount, register,
-} from '../../data/network-data';
+import API from '../../data/network-data';
 import { hideLoading, showLoading } from '../loading/action';
 
 function addAccountActionCreator({
@@ -50,7 +48,7 @@ function myAccountActionCreator({
 function asyncRegister(formData) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const result = await register(formData);
+    const result = await API.register(formData);
     if (!result?.error) {
       dispatch(addAccountActionCreator(result?.account));
     }
@@ -61,7 +59,7 @@ function asyncRegister(formData) {
 function asyncLogin(formData) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const result = await login(formData);
+    const result = await API.login(formData);
     if (!result?.error) {
       dispatch(loginActionCreator({ token: result?.token }));
     }
@@ -72,7 +70,7 @@ function asyncLogin(formData) {
 function asyncReceiveUsers(UserId) {
   return async (dispatch) => {
     dispatch(showLoading());
-    const result = getUsersFromStorage() || await getUsers(UserId);
+    const result = API.getUsersFromStorage() || await API.getUsers(UserId);
     if (!result?.error) {
       dispatch(userActionCreator(result));
     }
@@ -82,7 +80,7 @@ function asyncReceiveUsers(UserId) {
 function asyncReceiveMyAccount() {
   return async (dispatch) => {
     dispatch(showLoading());
-    const result = await myAccount();
+    const result = await API.myAccount();
 
     if (!result?.error) {
       dispatch(myAccountActionCreator(result?.myAccount));
