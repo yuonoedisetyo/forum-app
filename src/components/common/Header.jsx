@@ -29,7 +29,10 @@ function Header() {
         </Link>
         {isLogin ? (
           <Link to="/myaccount">
-            <img src={IconAccount} alt="icon-account" style={{ height: 32, width: 32 }} />
+            <div style={{display:'flex',alignItems:'center'}}>
+              <img src={IconAccount} alt="icon-account" style={{ height: 32, width: 32,marginRight:6 }} />
+              <label style={{fontSize:24,cursor:'pointer'}}>My Account</label>
+            </div>
           </Link>
         )
           : (
