@@ -5,7 +5,7 @@ import LoadingBar from './common/LoadingBar';
 
 function LoginInput({ login, loading }) {
   const [email, onEmailChange] = useInput('');
-  const [password, onPasswordChange] = useInput('');
+  const [password, onPasswordChangee] = useInput('');
 
   const onSubmitHandler = (event) => {
     // Cegah peramban memuat ulang halaman
@@ -26,7 +26,7 @@ function LoginInput({ login, loading }) {
       <input
         type="email"
         name="email"
-        placeholder="Email"
+        placeholder="Emaill"
         value={email}
         onChange={onEmailChange}
       />
