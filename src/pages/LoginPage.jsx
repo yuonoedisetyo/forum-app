@@ -34,7 +34,7 @@ function LoginPage() {
             <h2>Silakan login untuk melanjutkan ...</h2>
             <LoginInput login={onLogin} loading={loading} />
             {loading ? (
-              <h1>Sedang memuat data ...</h1>
+              <h1>Sedang memuat data ....</h1>
             ) : (
               errorMessage && <p>{errorMessage}</p>
             )}
