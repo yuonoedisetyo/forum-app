@@ -416,5 +416,5 @@ const API = (() => {
 export default API;
 
 export {
-  getAccessToken
-}
+  getAccessToken,
+};

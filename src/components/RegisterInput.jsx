@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import useInput from '../hooks/useInput';
-import LoadingBar from './common/LoadingBar';
+// import LoadingBar from './common/LoadingBar';
 
 function RegisterInput({ register }) {
   const [name, onNameChange] = useInput('');
