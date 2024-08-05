@@ -32,7 +32,7 @@ function Header() {
           <Link to="/myaccount">
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <img src={IconAccount} alt="icon-account" style={{ height: 32, width: 32, marginRight: 6 }} />
-              <label htmlFor="my_account" style={{ fontSize: 24, cursor: 'pointer' }}>My Account</label>
+              <label htmlFor="myaccount" style={{ fontSize: 24, cursor: 'pointer' }}>My Account</label>
             </div>
           </Link>
         )
