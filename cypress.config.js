@@ -7,6 +7,7 @@ export default defineConfig({
     },
     defaultCommandTimeout: 10000, // Waktu timeout dalam milidetik (misalnya 10 detik)
     responseTimeout: 15000, // Timeout untuk menunggu respons dari server
-    pageLoadTimeout: 60000 // Timeout untuk menunggu halaman dimuat
+    pageLoadTimeout: 60000, // Timeout untuk menunggu halaman dimuat
+    requestTimeout:10000
   },
 });
